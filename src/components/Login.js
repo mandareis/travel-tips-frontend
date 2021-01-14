@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const LoginFormInput = (props) => {
   return (
-    <div className="register-form">
+    <div className="login-form">
       <div className="input-prefix-icon">
         <i className={`fas ${props.icon}`}></i>
       </div>
@@ -34,13 +35,13 @@ function Login() {
       };
     }
     const innerLoginBtn = (
-      <button type="submit" className="register-btn" style={loginBtn}>
+      <button type="submit" className="login-btn" style={loginBtn}>
         <i className="fas fa-sign-in-alt fa-lg"></i>
       </button>
     );
 
     if (loginErr && isButtonAnimating) {
-      const movement = 17;
+      const movement = 12;
       return (
         <motion.div
           onAnimationComplete={() => {
@@ -82,26 +83,30 @@ function Login() {
     <div className="login-form" onSubmit={handlesLogin}>
       <form className="login-input-container">
         <h2>Login</h2>
-
-        <LoginFormInput
-          type="text"
-          icon="fa-user"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <LoginFormInput
-          type="password"
-          icon="fa-lock"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="input-container">
+          <LoginFormInput
+            type="text"
+            icon="fa-user"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <LoginFormInput
+            type="password"
+            icon="fa-lock"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <div className="login-btns">
-          <div>
-            <i className="fas fa-chevron-circle-left go-back-btn"></i>
+          <div id="navlink">
+            <NavLink to="/">
+              <i className="fas fa-chevron-circle-left go-back-btn"></i>
+            </NavLink>
           </div>
-          <div> {getLoginBtn()}</div>
+
+          <div id="get-login-btn">{getLoginBtn()}</div>
         </div>
       </form>
     </div>

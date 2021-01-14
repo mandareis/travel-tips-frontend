@@ -1,7 +1,9 @@
 html {
   background-image: url("./images/testimage.jpg");
 }
-
+body {
+  font-family: "Gothic A1", sans-serif;
+}
 .site-main-outer {
   padding: 1em;
   margin-top: 30vh;
@@ -11,34 +13,52 @@ html {
   -webkit-box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
   box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
 }
+
 .site-main-inner {
   padding: 1em;
-  /* margin-top: 30vh; */
   border-radius: 0.75em;
-  overflow: scroll;
   background-color: rgba(255, 255, 255, 0.3);
   mix-blend-mode: multiply;
   backdrop-filter: blur(10px);
 }
+
 .login-style {
   background-color: white;
 }
+
 input {
   background: transparent;
   border: none;
   outline: none;
   margin: 5px;
 }
-.register-form .input-prefix-icon {
+a {
+  text-decoration: none;
+  color: rgba(1, 1, 0.6, 0.4);
+}
+.footer-colors {
+  text-decoration: none;
+  font-size: 16px;
+  padding: 1em;
+}
+h2 {
+  margin: 0.5em;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.register-form .input-prefix-icon,
+.login-form .input-prefix-icon {
   width: 16px;
   color: rgba(0, 0, 0, 0.3);
 }
-.register-form {
+
+.register-form,
+.login-form {
   display: inline-flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
+
 .register-btn,
 .login-btn,
 .go-back-btn {
@@ -47,22 +67,51 @@ input {
   outline: none;
   color: rgba(0, 0, 0, 0.5);
 }
+
 .register-btn:hover,
 .login-btn:hover,
 .go-back-btn:hover {
   color: rgba(0, 0, 0, 0.4);
 }
+
 .register-btn:active,
 .logiin-btn:active,
 .go-back-btn:active {
   color: rgba(0, 0, 0, 0.6);
 }
-.go-back-btn {
-  /* position: absolute;
-  top: 0px;
-  right: 0px; */
+
+.login-page-btn {
   color: rgba(0, 0, 0, 0.3);
 }
+
 .login-btns {
   display: flex;
+}
+
+#footer {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.footer-colors {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.footer-colors:hover {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.footer-colors:active {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.login-btns {
+  display: flex;
+}
+
+#navlink {
+  margin-left: 1em;
+}
+#get-login-btn {
+  margin-left: 1em;
 }
