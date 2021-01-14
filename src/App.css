@@ -39,15 +39,30 @@ input {
   align-items: center;
   margin-bottom: 15px;
 }
-.register-btn {
+.register-btn,
+.login-btn,
+.go-back-btn {
   background: transparent;
   border: none;
   outline: none;
   color: rgba(0, 0, 0, 0.5);
 }
-.register-btn:hover {
+.register-btn:hover,
+.login-btn:hover,
+.go-back-btn:hover {
   color: rgba(0, 0, 0, 0.4);
 }
-.register-btn:active {
+.register-btn:active,
+.logiin-btn:active,
+.go-back-btn:active {
   color: rgba(0, 0, 0, 0.6);
+}
+.go-back-btn {
+  /* position: absolute;
+  top: 0px;
+  right: 0px; */
+  color: rgba(0, 0, 0, 0.3);
+}
+.login-btns {
+  display: flex;
 }

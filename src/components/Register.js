@@ -24,13 +24,10 @@ function Register(props) {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password_confirmation, setPasswordConfirmation] = useState("");
   const [registerErr, setRegisterErr] = useState(false);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
-  // const [errPassword, setErrPassword] = useState({
-  //   password: "",
-  //   mismatch: "",
-  // });
 
   const getRegisterBtn = () => {
     let registerBtn = {};
@@ -63,24 +60,30 @@ function Register(props) {
     return innerRegisterBtn;
   };
 
-  // const handleConfirmPassword = () => {};
   const handlesLogin = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch("/sessions", {
+      let response = await fetch("/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          name,
+          username,
+          email,
+          password,
+          password_confirmation,
+        }),
       });
       if (!response.ok) {
         setRegisterErr(true);
         setIsButtonAnimating(true);
       } else {
         const data = await response.json();
-        props.onLogin({ id: data.user_id, username: data.username });
+        console.log(`Hello ${data.name}. Welcome!`);
+        // props.onLogin({ id: data.user_id, username: data.username });
       }
     } catch (err) {
       console.log(err);
@@ -108,6 +111,14 @@ function Register(props) {
           onChange={(e) => setUsername(e.target.value)}
         />
         <RegisterFormInput
+          type="text"
+          icon="fa-at"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <RegisterFormInput
           type="password"
           icon="fa-lock"
           placeholder="Password"
@@ -118,10 +129,10 @@ function Register(props) {
         <RegisterFormInput
           type="password"
           icon="fa-lock"
-          name="new_password"
+          name="password_confirmation"
           placeholder="Confirm Password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          value={password_confirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
         <div className="register-btn">{getRegisterBtn()}</div>
 

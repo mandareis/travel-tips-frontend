@@ -20,11 +20,6 @@ const LoginFormInput = (props) => {
   );
 };
 
-const handlesLogin = (e) => {
-  e.preventDefault();
-  return <p>something else</p>;
-};
-
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -63,6 +58,26 @@ function Login() {
     return innerLoginBtn;
   };
 
+  const handlesLogin = async (e) => {
+    e.preventDefault();
+    let response = await fetch("/sessions", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!response.ok) {
+      setLoginErr(true);
+      setIsButtonAnimating(true);
+    } else {
+      const data = await response.json();
+      console.log(data);
+      console.log(`Hello, ${data.username}`);
+    }
+  };
+
   return (
     <div className="login-form" onSubmit={handlesLogin}>
       <form className="login-input-container">
@@ -82,7 +97,12 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div> {getLoginBtn()}</div>
+        <div className="login-btns">
+          <div>
+            <i className="fas fa-chevron-circle-left go-back-btn"></i>
+          </div>
+          <div> {getLoginBtn()}</div>
+        </div>
       </form>
     </div>
   );
