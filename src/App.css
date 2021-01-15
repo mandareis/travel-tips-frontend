@@ -22,10 +22,13 @@ body {
   backdrop-filter: blur(10px);
 }
 
-.login-style {
+/* .login-style {
   background-color: white;
+} */
+.register-input-container,
+.login-input-container {
+  display: grid;
 }
-
 input {
   background: transparent;
   border: none;
@@ -105,13 +108,39 @@ h2 {
   color: rgba(0, 0, 0, 0.6);
 }
 
-.login-btns {
-  display: flex;
-}
-
 #navlink {
   margin-left: 1em;
 }
 #get-login-btn {
   margin-left: 1em;
+}
+.register-input-container .register-btn {
+  margin: -0.3em;
+}
+.nav-bar-container {
+  display: inline-flex;
+
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75em;
+  backdrop-filter: blur(5px);
+  -webkit-box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
+}
+
+#home-btn,
+#love-btn,
+#sign-out-btn,
+#config-btn,
+#search-btn {
+  padding: 1.5em;
+}
+.settings {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+#user-edit,
+#user-delete {
+  padding-right: 4em;
 }

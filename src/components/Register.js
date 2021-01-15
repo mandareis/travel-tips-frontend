@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import { useTravelStore } from "../TipsContext";
+import { observer } from "mobx-react";
 
 const RegisterFormInput = (props) => {
   return (
@@ -20,7 +22,8 @@ const RegisterFormInput = (props) => {
     </div>
   );
 };
-function Register(props) {
+function Register() {
+  let history = useHistory();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +31,7 @@ function Register(props) {
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [registerErr, setRegisterErr] = useState(false);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
+  const store = useTravelStore();
 
   const getRegisterBtn = () => {
     let registerBtn = {};
@@ -60,7 +64,7 @@ function Register(props) {
     return innerRegisterBtn;
   };
 
-  const handlesLogin = async (e) => {
+  const handlesRegister = async (e) => {
     e.preventDefault();
     try {
       let response = await fetch("/users", {
@@ -82,6 +86,10 @@ function Register(props) {
         setIsButtonAnimating(true);
       } else {
         const data = await response.json();
+        store.user = data;
+        if (store.user) {
+          history.push("/suggestions");
+        }
         console.log(`Hello ${data.name}. Welcome!`);
         // props.onLogin({ id: data.user_id, username: data.username });
       }
@@ -90,61 +98,60 @@ function Register(props) {
     }
   };
   return (
-    <div>
-      <div className="register-form" onSubmit={handlesLogin}>
-        <form className="register-input-container">
-          <h2>Create an account</h2>
+    <div className="register-form" onSubmit={handlesRegister}>
+      <form className="register-input-container">
+        <h2>Create an account</h2>
 
-          <RegisterFormInput
-            type="text"
-            icon="fa-user"
-            placeholder="Name"
-            value={name}
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <RegisterFormInput
-            type="text"
-            icon="fa-user"
-            placeholder="Username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <RegisterFormInput
-            type="text"
-            icon="fa-at"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <RegisterFormInput
-            type="password"
-            icon="fa-lock"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <RegisterFormInput
-            type="password"
-            icon="fa-lock"
-            name="password_confirmation"
-            placeholder="Confirm Password"
-            value={password_confirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-          />
-          <div className="register-btn">{getRegisterBtn()}</div>
-
+        <RegisterFormInput
+          type="text"
+          icon="fa-user"
+          placeholder="Name"
+          value={name}
+          name="name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <RegisterFormInput
+          type="text"
+          icon="fa-user"
+          placeholder="Username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <RegisterFormInput
+          type="text"
+          icon="fa-at"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <RegisterFormInput
+          type="password"
+          icon="fa-lock"
+          placeholder="Password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <RegisterFormInput
+          type="password"
+          icon="fa-lock"
+          name="password_confirmation"
+          placeholder="Confirm Password"
+          value={password_confirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+        />
+        <div className="register-btn">{getRegisterBtn()}</div>
+        <div className="login-account">
           <h5>
             Already have an account?
             <NavLink to="/login"> Login</NavLink>
           </h5>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
 
-export default Register;
+export default observer(Register);

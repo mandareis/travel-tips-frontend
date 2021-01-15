@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import { useTravelStore } from "../TipsContext";
+import { runInAction } from "mobx";
+import { observer } from "mobx-react-lite";
 
 const LoginFormInput = (props) => {
   return (
@@ -22,10 +25,12 @@ const LoginFormInput = (props) => {
 };
 
 function Login() {
+  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginErr, setLoginErr] = useState(false);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
+  const store = useTravelStore();
 
   const getLoginBtn = () => {
     let loginBtn = {};
@@ -43,17 +48,19 @@ function Login() {
     if (loginErr && isButtonAnimating) {
       const movement = 12;
       return (
-        <motion.div
-          onAnimationComplete={() => {
-            setIsButtonAnimating(false);
-          }}
-          animate={{
-            translateX: [0, -movement, movement, -movement, movement, 0],
-          }}
-          transition={{ duration: 0.6, ease: "easeInOut", loop: 0 }}
-        >
-          {innerLoginBtn}
-        </motion.div>
+        <div class="login">
+          <motion.div
+            onAnimationComplete={() => {
+              setIsButtonAnimating(false);
+            }}
+            animate={{
+              translateX: [0, -movement, movement, -movement, movement, 0],
+            }}
+            transition={{ duration: 0.6, ease: "easeInOut", loop: 0 }}
+          >
+            {innerLoginBtn}
+          </motion.div>
+        </div>
       );
     }
     return innerLoginBtn;
@@ -74,16 +81,21 @@ function Login() {
       setIsButtonAnimating(true);
     } else {
       const data = await response.json();
-      console.log(data);
+      runInAction(() => {
+        store.user = data;
+        if (store.user) {
+          history.push("/suggestions");
+        }
+      });
       console.log(`Hello, ${data.username}`);
     }
   };
 
   return (
     <div className="login-form" onSubmit={handlesLogin}>
-      <form className="login-input-container">
+      <form className="form-container">
         <h2>Login</h2>
-        <div className="input-container">
+        <div className="login-input-container">
           <LoginFormInput
             type="text"
             icon="fa-user"
@@ -112,4 +124,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default observer(Login);
