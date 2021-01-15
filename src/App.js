@@ -6,7 +6,7 @@ import Settings from "./components/Settings";
 import NavBar from "./components/NavBar";
 import UpdateUser from "./components/UpdateUser";
 import SuggestionsPage from "./components/SuggestionsPage";
-// import { autorun } from "mobx";
+import ChangePassword from "./components/ChangePassword";
 
 const PageContainer = ({ children }) => {
   return (
@@ -70,6 +70,11 @@ function App() {
           <Route path="/suggestions">
             <PageContainer>
               <SuggestionsPage />
+            </PageContainer>
+          </Route>
+          <Route path="/change-password">
+            <PageContainer>
+              <ChangePassword />
             </PageContainer>
           </Route>
         </Switch>

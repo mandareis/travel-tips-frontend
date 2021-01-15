@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { useTravelStore } from "../TipsContext";
+import { motion } from "framer-motion";
 import { observer } from "mobx-react";
-import { runInAction } from "mobx";
+// import { runInAction } from "mobx";
 
 const UpdateFormInput = (props) => {
   return (
-    <div className="register-form">
+    <div className="update-form">
       <div className="input-prefix-icon">
         <i className={`fas ${props.icon}`}></i>
       </div>
@@ -23,15 +23,14 @@ const UpdateFormInput = (props) => {
   );
 };
 
-function UpdateUser() {
+function ChangePassword() {
   const store = useTravelStore();
-  const [name, setName] = useState(store.user.name || "");
-  const [username, setUsername] = useState(store.user.username || "");
-  const [email, setEmail] = useState(store.user.email || "");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [registerErr, setRegisterErr] = useState(false);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
 
-  //if no user navigate away
   const getUpdateBtn = () => {
     let UpdateBtn = {};
     if (registerErr && isButtonAnimating) {
@@ -64,66 +63,59 @@ function UpdateUser() {
   };
 
   const handlesUpdate = async (e) => {
+    if (newPassword !== passwordConfirm) {
+      alert("Password mismatch");
+      return;
+    }
     e.preventDefault();
-    let response = await fetch(`/users/${store.user.user_id}`, {
-      method: "PATCH",
+    let response = await fetch(`/users/${store.user.user_id}/change-password`, {
+      method: "PUT",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        name,
-        username,
-        email,
+        old_password: oldPassword,
+        new_password: newPassword,
       }),
     });
     if (!response.ok) {
       setRegisterErr(true);
       setIsButtonAnimating(true);
-    } else {
-      const data = await response.json();
-      console.log(data);
-      runInAction(() => {
-        store.user.name = name;
-        store.user.username = username;
-        store.user.email = email;
-      });
     }
   };
   return (
     <div className="update-form" onSubmit={handlesUpdate}>
       <form className="register-input-container">
-        <h2>Update {store.user?.username}'s account information:</h2>
+        <h2>Update password:</h2>
 
         <UpdateFormInput
-          type="text"
-          icon="fa-user"
-          placeholder="Name"
-          value={name}
-          name="name"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          type="password"
+          icon="fa-lock"
+          placeholder="Current Password"
+          name="password"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
         />
         <UpdateFormInput
-          type="text"
-          icon="fa-user"
-          placeholder="Username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="password"
+          icon="fa-lock"
+          placeholder="New Password"
+          name="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
         />
         <UpdateFormInput
-          type="text"
-          icon="fa-at"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="password"
+          icon="fa-lock"
+          placeholder="Confirm New Password"
+          name="password"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
         />
         <div className="update-btn">{getUpdateBtn()}</div>
       </form>
     </div>
   );
 }
-
-export default observer(UpdateUser);
+export default observer(ChangePassword);
