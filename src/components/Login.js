@@ -48,7 +48,7 @@ function Login() {
     if (loginErr && isButtonAnimating) {
       const movement = 12;
       return (
-        <div class="login">
+        <div className="login">
           <motion.div
             onAnimationComplete={() => {
               setIsButtonAnimating(false);

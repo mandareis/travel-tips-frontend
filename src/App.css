@@ -1,12 +1,12 @@
-html {
-  background-image: url("./images/testimage.jpg");
-}
+/* styles the body of the site */
+
 body {
+  background-image: url("./images/testimage.jpg");
   font-family: "Gothic A1", sans-serif;
 }
 .site-main-outer {
   padding: 1em;
-  margin-top: 30vh;
+  margin-top: 5em;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75em;
   backdrop-filter: blur(5px);
@@ -17,7 +17,7 @@ body {
 .site-main-inner {
   padding: 1em;
   border-radius: 0.75em;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   mix-blend-mode: multiply;
   backdrop-filter: blur(10px);
 }
@@ -26,8 +26,12 @@ body {
 .login-input-container {
   display: grid;
 }
+/* styles the body of the site */
+
+/* adds style to titles, input and a */
 input {
   background: transparent;
+  justify-content: center;
   border: none;
   outline: none;
   margin: 5px;
@@ -36,15 +40,42 @@ a {
   text-decoration: none;
   color: rgba(1, 1, 0.6, 0.4);
 }
+h2 {
+  /* margin: 0.5em; */
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+h4 {
+  text-align: center;
+  display: block;
+  margin-block-start: 0em;
+}
+/* adds style to titles,input and a */
+
+/* styles footer */
 .footer-colors {
   text-decoration: none;
   font-size: 16px;
   padding: 1em;
 }
-h2 {
-  margin: 0.5em;
+#footer {
+  text-align: center;
+  margin-top: 10%;
+}
+.footer-colors {
+  color: rgb(0, 0, 0, 0.5);
+}
+
+.footer-colors:hover {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.footer-colors:active {
   color: rgba(0, 0, 0, 0.6);
 }
+
+/* styles footer */
 
 .register-form .input-prefix-icon,
 .login-form .input-prefix-icon,
@@ -93,23 +124,6 @@ h2 {
   display: flex;
 }
 
-#footer {
-  text-align: center;
-  margin-top: 20%;
-}
-
-.footer-colors {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.footer-colors:hover {
-  color: rgba(0, 0, 0, 0.4);
-}
-
-.footer-colors:active {
-  color: rgba(0, 0, 0, 0.6);
-}
-
 #navlink {
   margin-left: 1em;
 }
@@ -123,7 +137,7 @@ h2 {
   display: flex;
   justify-content: center;
   width: auto;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75em;
   backdrop-filter: blur(5px);
@@ -150,3 +164,90 @@ h2 {
   padding: 0 3em;
   text-align: center;
 }
+
+/* Modal styling */
+.App {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+
+.modal {
+  z-index: 100;
+  background: white;
+  margin: 5rem auto;
+  border-radius: 0.75em;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+.modal p {
+  text-align: center;
+}
+.modal-close-button {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  /* color: #000; */
+  opacity: 0.3;
+  cursor: pointer;
+  border: none;
+}
+
+button {
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  padding: 0.3rem 1rem;
+  outline: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+#x-btn {
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+.button-default,
+.user-delete {
+  color: rgb(130, 137, 152);
+}
+
+.delete-account-btns {
+  display: flex;
+  justify-content: center;
+  padding: 0.2em;
+}
+#yes-btn,
+#no-btn {
+  padding: 0.4em;
+}
+/* Modal styling */

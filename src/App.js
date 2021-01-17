@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Settings from "./components/Settings";
@@ -7,13 +13,32 @@ import NavBar from "./components/NavBar";
 import UpdateUser from "./components/UpdateUser";
 import SuggestionsPage from "./components/SuggestionsPage";
 import ChangePassword from "./components/ChangePassword";
+import { observer } from "mobx-react";
+import { useTravelStore } from "./TipsContext";
+import { runInAction } from "mobx";
 
 const PageContainer = ({ children }) => {
+  let history = useHistory();
+  const store = useTravelStore();
+
+  const onLogOut = async () => {
+    const response = await fetch("/sessions", {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      runInAction(() => {
+        store.user = null;
+      });
+      history.push("/");
+      alert("I've successfully logged user out");
+    }
+  };
+
   return (
     <div className="container">
       <div className="row ">
         <div className="col">
-          <NavBar />
+          <NavBar onLogOut={onLogOut} />
         </div>
       </div>
       <div className="row">
@@ -62,7 +87,7 @@ function App() {
               <Settings />
             </PageContainer>
           </Route>
-          <Route path="/edituser">
+          <Route path="/edit-user">
             <PageContainer>
               <UpdateUser />
             </PageContainer>
@@ -83,4 +108,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

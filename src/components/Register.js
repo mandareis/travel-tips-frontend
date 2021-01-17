@@ -67,7 +67,7 @@ function Register() {
   const handlesRegister = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch("/users", {
+      let response = await fetch("/sessions/register", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -91,7 +91,6 @@ function Register() {
           history.push("/suggestions");
         }
         console.log(`Hello ${data.name}. Welcome!`);
-        // props.onLogin({ id: data.user_id, username: data.username });
       }
     } catch (err) {
       console.log(err);

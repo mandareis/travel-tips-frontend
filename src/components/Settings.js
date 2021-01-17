@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import DeleteUser from "./DeleteUser";
 
 function Settings() {
   return (
     <div className="settings">
       <div id="user-edit">
-        <NavLink to="/edituser">
+        <NavLink to="/edit-user">
           <i className="fas fa-user-edit fa-2x"></i>
           <p>Update User</p>
         </NavLink>
@@ -17,8 +18,7 @@ function Settings() {
         </NavLink>
       </div>
       <div className="user-delete">
-        <i className="fas fa-user-times fa-2x"></i>
-        <p>Delete Account</p>
+        <DeleteUser />
       </div>
     </div>
   );

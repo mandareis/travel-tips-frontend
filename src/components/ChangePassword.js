@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTravelStore } from "../TipsContext";
 import { motion } from "framer-motion";
 import { observer } from "mobx-react";
-// import { runInAction } from "mobx";
 
 const UpdateFormInput = (props) => {
   return (
@@ -68,7 +67,7 @@ function ChangePassword() {
       return;
     }
     e.preventDefault();
-    let response = await fetch(`/users/${store.user.user_id}/change-password`, {
+    let response = await fetch(`/users/change-password`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

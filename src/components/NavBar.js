@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { observer } from "mobx-react";
+import { useTravelStore } from "../TipsContext";
 
-function NavBar() {
+function NavBar(props) {
+  const store = useTravelStore();
   return (
     <div className="nav-bar-container">
       <div id="home-btn">
@@ -19,18 +22,21 @@ function NavBar() {
           <i className="fas fa-heart fa-lg"></i>
         </NavLink>
       </div>
-      <div id="config-btn">
-        <NavLink to="/settings">
-          <i className="fas fa-cog fa-lg"></i>
-        </NavLink>
-      </div>
+      {/* {console.log(store.user.user_id)} */}
+      {store.user?.user_id ? (
+        <div id="config-btn">
+          <NavLink to="/settings">
+            <i className="fas fa-cog fa-lg"></i>
+          </NavLink>
+        </div>
+      ) : null}
       <div id="sign-out-btn">
-        <NavLink to="/">
+        <a href="#" onClick={props.onLogOut}>
           <i className="fas fa-sign-out-alt fa-lg"></i>
-        </NavLink>
+        </a>
       </div>
     </div>
   );
 }
 
-export default NavBar;
+export default observer(NavBar);

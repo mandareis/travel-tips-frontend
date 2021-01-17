@@ -1,5 +1,5 @@
 export function createTravelStore() {
   return {
-    user: null,
+    user: window._bootstrap_data,
   };
 }

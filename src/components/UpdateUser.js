@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
 import { runInAction } from "mobx";
+// import { toJS } from "mobx";
 
 const UpdateFormInput = (props) => {
   return (
@@ -25,9 +26,9 @@ const UpdateFormInput = (props) => {
 
 function UpdateUser() {
   const store = useTravelStore();
-  const [name, setName] = useState(store.user.name || "");
-  const [username, setUsername] = useState(store.user.username || "");
-  const [email, setEmail] = useState(store.user.email || "");
+  const [name, setName] = useState(store.user?.name || "");
+  const [username, setUsername] = useState(store.user?.username || "");
+  const [email, setEmail] = useState(store.user?.email || "");
   const [registerErr, setRegisterErr] = useState(false);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
 
@@ -62,7 +63,7 @@ function UpdateUser() {
     }
     return innerUpdateBtn;
   };
-
+  //   console.log(toJS(store));
   const handlesUpdate = async (e) => {
     e.preventDefault();
     let response = await fetch(`/users/${store.user.user_id}`, {
@@ -93,7 +94,6 @@ function UpdateUser() {
     <div className="update-form" onSubmit={handlesUpdate}>
       <form className="register-input-container">
         <h2>Update {store.user?.username}'s account information:</h2>
-
         <UpdateFormInput
           type="text"
           icon="fa-user"
