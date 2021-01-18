@@ -5,6 +5,27 @@ import { useTravelStore } from "../TipsContext";
 
 function NavBar(props) {
   const store = useTravelStore();
+
+  const enableFeatures = () => {
+    if (store.user?.user_id) {
+      return (
+        <div className="private-features">
+          <div id="config-btn">
+            <NavLink to="/settings">
+              <i className="fas fa-cog fa-lg"></i>
+            </NavLink>
+          </div>
+          <div id="sign-out-btn">
+            <a href="#" onClick={props.onLogOut}>
+              <i className="fas fa-sign-out-alt fa-lg"></i>
+            </a>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
   return (
     <div className="nav-bar-container">
       <div id="home-btn">
@@ -12,28 +33,33 @@ function NavBar(props) {
           <i className="fas fa-home fa-lg"></i>
         </NavLink>
       </div>
-      <div id="search-btn">
-        <NavLink to="/search">
-          <i className="fas fa-search fa-lg"></i>
+      <div id="sugs-btn">
+        <NavLink to="featured-suggestions">
+          <i class="fas fa-atlas fa-lg"></i>
+        </NavLink>
+      </div>
+      <div id="add-sug-btn">
+        <NavLink to="/add-suggestion">
+          <i class="fas fa-lightbulb fa-lg"></i>
         </NavLink>
       </div>
       <div id="love-btn">
-        <NavLink to="/likes">
+        <NavLink to="/favorites">
           <i className="fas fa-heart fa-lg"></i>
         </NavLink>
       </div>
-      {/* {console.log(store.user.user_id)} */}
-      {store.user?.user_id ? (
-        <div id="config-btn">
-          <NavLink to="/settings">
-            <i className="fas fa-cog fa-lg"></i>
-          </NavLink>
-        </div>
-      ) : null}
-      <div id="sign-out-btn">
-        <a href="#" onClick={props.onLogOut}>
-          <i className="fas fa-sign-out-alt fa-lg"></i>
-        </a>
+
+      <div className="search-btn">
+        <i className="fas fa-search fa-lg"></i>
+        <input
+          id="input-sug"
+          value=""
+          // type="text"
+          // onChange=""
+          autoComplete="off"
+          placeholder="search"
+        />
+        {enableFeatures()}
       </div>
     </div>
   );

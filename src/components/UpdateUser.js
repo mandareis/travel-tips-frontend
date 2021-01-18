@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
+import { NavLink } from "react-router-dom";
 import { runInAction } from "mobx";
 // import { toJS } from "mobx";
 
@@ -120,7 +121,13 @@ function UpdateUser() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <div className="update-btn">{getUpdateBtn()}</div>
+
+        <div id="navlink">
+          <NavLink to="/settings">
+            <i className="fas fa-chevron-circle-left go-back-btn"></i>
+          </NavLink>
+          <div className="update-btn">{getUpdateBtn()}</div>
+        </div>
       </form>
     </div>
   );

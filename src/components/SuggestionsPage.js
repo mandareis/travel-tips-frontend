@@ -1,11 +1,14 @@
 import React from "react";
+import { observer } from "mobx-react";
+import { useTravelStore } from "../TipsContext";
 
 function SuggestionsPage() {
+  const store = useTravelStore();
   return (
     <div>
-      <p>Featured Suggestions will go here</p>
+      <h3> Hello {store.user.name}. Welcome!</h3>
     </div>
   );
 }
 
-export default SuggestionsPage;
+export default observer(SuggestionsPage);

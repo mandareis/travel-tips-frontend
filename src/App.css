@@ -23,7 +23,8 @@ body {
 }
 
 .register-input-container,
-.login-input-container {
+.login-input-container,
+.update-form {
   display: grid;
 }
 /* styles the body of the site */
@@ -33,6 +34,8 @@ input {
   background: transparent;
   justify-content: center;
   border: none;
+
+  border-radius: 0.85em;
   outline: none;
   margin: 5px;
 }
@@ -40,6 +43,16 @@ a {
   text-decoration: none;
   color: rgba(1, 1, 0.6, 0.4);
 }
+textarea {
+  font-family: "Gothic A1", sans-serif;
+  background: transparent;
+  justify-content: center;
+  border: none;
+  border-radius: 0.85em;
+  outline: none;
+  margin: 5px;
+}
+
 h2 {
   /* margin: 0.5em; */
   text-align: center;
@@ -121,11 +134,14 @@ h4 {
 }
 
 .login-btns {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
 }
 
 #navlink {
   margin-left: 1em;
+  align-items: center;
+  display: inline-flex;
 }
 #get-login-btn {
   margin-left: 1em;
@@ -134,23 +150,32 @@ h4 {
   margin: -0.3em;
 }
 .nav-bar-container {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  align-items: center;
   width: auto;
-  /* margin-top: 20px; */
-  /* border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75em;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   -webkit-box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
-  box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45); */
+  box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
 }
 
 #home-btn,
 #love-btn,
 #sign-out-btn,
 #config-btn,
-#search-btn {
-  padding: 1.5em;
+.search-btn,
+#add-sug-btn,
+#sugs-btn {
+  padding: 1em;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  color: rgb(94, 115, 151);
 }
 
 .settings {
@@ -170,7 +195,9 @@ h4 {
   text-align: center;
   padding-top: 2rem;
 }
-
+.private-features {
+  display: flex;
+}
 .modal-overlay {
   position: fixed;
   top: 0;

@@ -5,7 +5,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Settings from "./components/Settings";
@@ -13,6 +13,8 @@ import NavBar from "./components/NavBar";
 import UpdateUser from "./components/UpdateUser";
 import SuggestionsPage from "./components/SuggestionsPage";
 import ChangePassword from "./components/ChangePassword";
+import SuggestionForm from "./components/SuggestionForm";
+import Favorites from "./components/Favorites";
 import { observer } from "mobx-react";
 import { useTravelStore } from "./TipsContext";
 import { runInAction } from "mobx";
@@ -92,7 +94,7 @@ function App() {
               <UpdateUser />
             </PageContainer>
           </Route>
-          <Route path="/suggestions">
+          <Route path="/featured-suggestions">
             <PageContainer>
               <SuggestionsPage />
             </PageContainer>
@@ -100,6 +102,16 @@ function App() {
           <Route path="/change-password">
             <PageContainer>
               <ChangePassword />
+            </PageContainer>
+          </Route>
+          <Route path="/add-suggestion">
+            <PageContainer>
+              <SuggestionForm />
+            </PageContainer>
+          </Route>
+          <Route path="/favorites">
+            <PageContainer>
+              <Favorites />
             </PageContainer>
           </Route>
         </Switch>

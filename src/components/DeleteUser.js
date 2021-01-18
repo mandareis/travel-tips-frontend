@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { useTravelStore } from "../TipsContext";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ReactDOM from "react-dom";
 
 const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
-
   function toggle() {
     setIsShowing(!isShowing);
   }
@@ -59,6 +58,7 @@ const Modal = ({ isShowing, hide, onDelete, user }) =>
     : null;
 
 function DeleteUser() {
+  let history = useHistory();
   const { isShowing, toggle } = useModal();
   const store = useTravelStore();
 
@@ -67,7 +67,8 @@ function DeleteUser() {
       method: "DELETE",
     });
     if (!response.ok) {
-      <Redirect to="/" />;
+      history.push("/");
+      toggle();
     }
   };
   return (

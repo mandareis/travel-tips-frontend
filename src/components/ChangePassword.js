@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useTravelStore } from "../TipsContext";
 import { motion } from "framer-motion";
 import { observer } from "mobx-react";
+import { NavLink } from "react-router-dom";
 
 const UpdateFormInput = (props) => {
   return (
@@ -112,7 +113,12 @@ function ChangePassword() {
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
         />
-        <div className="update-btn">{getUpdateBtn()}</div>
+        <div id="navlink">
+          <NavLink to="/settings">
+            <i className="fas fa-chevron-circle-left go-back-btn"></i>
+          </NavLink>
+          <div className="update-btn">{getUpdateBtn()}</div>
+        </div>
       </form>
     </div>
   );

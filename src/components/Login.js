@@ -84,7 +84,7 @@ function Login() {
       runInAction(() => {
         store.user = data;
         if (store.user) {
-          history.push("/suggestions");
+          history.push("/featured-suggestions");
         }
       });
       console.log(`Hello, ${data.username}`);
