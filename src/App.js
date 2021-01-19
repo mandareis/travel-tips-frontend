@@ -12,6 +12,7 @@ import Settings from "./components/Settings";
 import NavBar from "./components/NavBar";
 import UpdateUser from "./components/UpdateUser";
 import SuggestionsPage from "./components/SuggestionsPage";
+import DisplaySuggestion from "./components/DisplaySuggestion";
 import ChangePassword from "./components/ChangePassword";
 import SuggestionForm from "./components/SuggestionForm";
 import Favorites from "./components/Favorites";
@@ -109,6 +110,14 @@ function App() {
               <SuggestionForm />
             </PageContainer>
           </Route>
+          <Route
+            path="/suggestion/:id"
+            render={(routeProps) => (
+              <PageContainer>
+                <DisplaySuggestion params={routeProps.match.params} />
+              </PageContainer>
+            )}
+          />
           <Route path="/favorites">
             <PageContainer>
               <Favorites />

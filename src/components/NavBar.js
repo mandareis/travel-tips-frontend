@@ -35,12 +35,12 @@ function NavBar(props) {
       </div>
       <div id="sugs-btn">
         <NavLink to="featured-suggestions">
-          <i class="fas fa-atlas fa-lg"></i>
+          <i className="fas fa-atlas fa-lg"></i>
         </NavLink>
       </div>
       <div id="add-sug-btn">
         <NavLink to="/add-suggestion">
-          <i class="fas fa-lightbulb fa-lg"></i>
+          <i className="fas fa-lightbulb fa-lg"></i>
         </NavLink>
       </div>
       <div id="love-btn">

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
 import { motion } from "framer-motion";
 
@@ -38,11 +39,14 @@ const LocationAutocomplete = (props) => {
   let listenerRef = useRef(null);
 
   useEffect(() => {
-    // checks to see if there's no value in the ref
+    let config = {};
+    if (props.citiesOnly) {
+      config = { types: ["(cities)"] };
+    }
     if (eleRef.current && !autocompleteRef.current) {
-      let ac = new google.maps.places.Autocomplete(eleRef.current, {
-        types: ["(cities)"],
-      });
+      // checks to see if there's no value in the ref
+      let ac = new google.maps.places.Autocomplete(eleRef.current, config);
+
       autocompleteRef.current = ac;
       // ac gets assigned to autocompleteRef.current
       let listener = ac.addListener("place_changed", () => {
@@ -55,11 +59,6 @@ const LocationAutocomplete = (props) => {
       });
       listenerRef.current = listener;
     }
-    return () => {
-      if (listenerRef.current) {
-        google.maps.event.removeListener(listenerRef.current);
-      }
-    };
   }, []);
 
   useEffect(() => {
@@ -89,11 +88,13 @@ const LocationAutocomplete = (props) => {
   );
 };
 
-function SuggestionForm() {
+function SuggestionForm(props) {
+  let history = useHistory();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [labels, setLabels] = useState("");
   const [place, setPlace] = useState(null);
+  const [city, setCity] = useState(null);
   const [error, setError] = useState(null);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -156,10 +157,14 @@ function SuggestionForm() {
       setError("Please select a place");
       return;
     }
+    if (!city) {
+      setError("Please select a city");
+      return;
+    }
     let matchingCountry = null;
-    let city = null;
+    let cityName = null;
     //iterating over the address_components to locate type="country"
-    componentIter: for (let component of place.address_components) {
+    componentIter: for (let component of city.address_components) {
       if (component.types.includes("country")) {
         // located the country component
         // iterate over our static list of countries to find a matching country
@@ -172,10 +177,10 @@ function SuggestionForm() {
         }
       }
       if (component.types.includes("locality")) {
-        city = component.long_name;
+        cityName = component.long_name;
       }
     }
-    if (!city) {
+    if (!cityName) {
       setError("Failed to find city. Please review your input");
       return;
     }
@@ -190,21 +195,29 @@ function SuggestionForm() {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        place: { country, continent: matchingCountry.continent },
+        place: {
+          country,
+          continent: matchingCountry.continent,
+          city: cityName,
+          name: place.name,
+        },
         title,
         description,
         labels,
       }),
     });
-    if (!response.status.created) {
-      setError("This is not working yet");
-    } else {
-      let data = response.json();
-      console.log(data);
+    if (!response.ok) {
+      //message of successfully created entry with a timer of 2seconds
+      setError("Please review your input");
+      return;
     }
+    let data = await response.json();
 
-    console.log(matchingCountry);
+    history.push(`/suggestion/${data.id}`);
+
+    // console.log(matchingCountry);
   };
+
   return (
     <div className="suggestion-form">
       <form
@@ -222,6 +235,12 @@ function SuggestionForm() {
             );
           })}
         </select>
+        <LocationAutocomplete
+          icon="fa-map-marker-alt"
+          citiesOnly
+          onPlaceChanged={(city) => setCity(city)}
+          country={country}
+        />
         <LocationAutocomplete
           icon="fa-map-marker-alt"
           onPlaceChanged={(place) => setPlace(place)}
@@ -252,9 +271,9 @@ function SuggestionForm() {
           placeholder="Tags..."
           onChange={(e) => setLabels(e.target.value)}
         />
-        <pre style={{ width: "100%", textAlign: "left" }}>
+        {/* <pre style={{ width: "100%", textAlign: "left" }}>
           place: {JSON.stringify(place, null, 2)}
-        </pre>
+        </pre> */}
 
         <div id="get-login-btn">{getUpdateBtn()}</div>
       </form>
