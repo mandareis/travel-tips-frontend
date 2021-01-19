@@ -24,7 +24,8 @@ body {
 
 .register-input-container,
 .login-input-container,
-.update-form {
+.update-form,
+.suggestion-form-container {
   display: grid;
 }
 /* styles the body of the site */
@@ -48,6 +49,8 @@ textarea {
   background: transparent;
   justify-content: center;
   border: none;
+  width: 100%;
+  resize: none;
   border-radius: 0.85em;
   outline: none;
   margin: 5px;
@@ -92,14 +95,16 @@ h4 {
 
 .register-form .input-prefix-icon,
 .login-form .input-prefix-icon,
-.update-form .input-prefix-icon {
+.update-form .input-prefix-icon,
+.suggestion-form .input-prefix-icon {
   width: 16px;
   color: rgba(0, 0, 0, 0.3);
 }
 
 .register-form,
 .login-form,
-.update-form {
+.update-form,
+.suggestion-form {
   display: inline-flex;
   align-items: center;
   margin-bottom: 15px;
@@ -108,7 +113,8 @@ h4 {
 .register-btn,
 .login-btn,
 .go-back-btn,
-.update-btn {
+.update-btn,
+.add-sug-btn {
   background: transparent;
   border: none;
   outline: none;
@@ -118,14 +124,16 @@ h4 {
 .register-btn:hover,
 .login-btn:hover,
 .go-back-btn:hover,
-.update-btn:hover {
+.update-btn:hover,
+.add-sug-btn:hover {
   color: rgba(0, 0, 0, 0.4);
 }
 
 .register-btn:active,
 .logiin-btn:active,
 .go-back-btn:active,
-.update-btn:active {
+.update-btn:active,
+.add-sug-btn:active {
   color: rgba(0, 0, 0, 0.6);
 }
 

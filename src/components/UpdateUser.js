@@ -83,6 +83,7 @@ function UpdateUser() {
       setIsButtonAnimating(true);
     } else {
       const data = await response.json();
+      alert("User successfully updated");
       console.log(data);
       runInAction(() => {
         store.user.name = name;

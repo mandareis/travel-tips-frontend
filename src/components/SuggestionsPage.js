@@ -6,7 +6,7 @@ function SuggestionsPage() {
   const store = useTravelStore();
   return (
     <div>
-      <h3> Hello {store.user.name}. Welcome!</h3>
+      <h3> Hello {store.user?.name}. Welcome!</h3>
     </div>
   );
 }
