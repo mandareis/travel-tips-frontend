@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
 import { motion } from "framer-motion";
+import { runInAction, toJS } from "mobx";
+import { useTravelStore } from "../TipsContext";
 
 const SuggestionFormInput = (props) => {
   return (
@@ -88,7 +90,7 @@ const LocationAutocomplete = (props) => {
   );
 };
 
-function SuggestionForm(props) {
+function SuggestionForm() {
   let history = useHistory();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -99,6 +101,7 @@ function SuggestionForm(props) {
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("US");
+  const store = useTravelStore();
 
   useEffect(() => {
     async function LoadCountries() {
@@ -212,7 +215,10 @@ function SuggestionForm(props) {
       return;
     }
     let data = await response.json();
-
+    runInAction(() => {
+      store.suggestion = data;
+    });
+    console.log(toJS(store.suggestion));
     history.push(`/suggestion/${data.id}`);
 
     // console.log(matchingCountry);

@@ -186,6 +186,12 @@ h4 {
   color: rgb(94, 115, 151);
 }
 
+/* .suggestion-box { */
+/* display: inline-block;
+  width: 40%;
+  text-align: center; */
+/* } */
+
 .settings {
   display: flex;
   justify-content: center;
@@ -197,7 +203,26 @@ h4 {
   padding: 0 3em;
   text-align: center;
 }
+.button-down,
+.button-up {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgb(94, 115, 151);
+}
+.button-up.active {
+  color: rgb(253, 226, 228);
+}
 
+.button-down.active {
+  color: rgb(153, 193, 222);
+}
+
+.votes-container {
+  display: table-caption;
+}
+.votes-info-container {
+}
 /* Modal styling */
 .App {
   text-align: center;

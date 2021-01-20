@@ -4,7 +4,6 @@ import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
 import { NavLink } from "react-router-dom";
 import { runInAction } from "mobx";
-// import { toJS } from "mobx";
 
 const UpdateFormInput = (props) => {
   return (
@@ -64,7 +63,7 @@ function UpdateUser() {
     }
     return innerUpdateBtn;
   };
-  //   console.log(toJS(store));
+
   const handlesUpdate = async (e) => {
     e.preventDefault();
     let response = await fetch(`/users/${store.user.user_id}`, {

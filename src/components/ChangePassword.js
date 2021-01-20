@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTravelStore } from "../TipsContext";
+// import { useTravelStore } from "../TipsContext";
 import { motion } from "framer-motion";
 import { observer } from "mobx-react";
 import { NavLink } from "react-router-dom";
@@ -24,7 +24,7 @@ const UpdateFormInput = (props) => {
 };
 
 function ChangePassword() {
-  const store = useTravelStore();
+  // const store = useTravelStore();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
