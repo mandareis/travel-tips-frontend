@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { NavLink, useHistory } from "react-router-dom";
 import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
+import { runInAction } from "mobx";
 
 const RegisterFormInput = (props) => {
   return (
@@ -29,7 +30,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
-  const [registerErr, setRegisterErr] = useState(false);
+  const [registerErr, setRegisterErr] = useState(null);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const store = useTravelStore();
 
@@ -50,7 +51,7 @@ function Register() {
       return (
         <motion.div
           onAnimationComplete={() => {
-            setIsButtonAnimating(false);
+            setIsButtonAnimating(null);
           }}
           animate={{
             translateX: [0, -movement, movement, -movement, movement, 0],
@@ -63,44 +64,43 @@ function Register() {
     }
     return innerRegisterBtn;
   };
-
+  // add error message for username, and email uniqueness.
   const handlesRegister = async (e) => {
     e.preventDefault();
-    try {
-      let response = await fetch("/sessions/register", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          username,
-          email,
-          password,
-          password_confirmation,
-        }),
-      });
-      if (!response.ok) {
-        setRegisterErr(true);
-        setIsButtonAnimating(true);
-      } else {
-        const data = await response.json();
+    let response = await fetch("/sessions/register", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        username,
+        email,
+        password,
+        password_confirmation,
+      }),
+    });
+    if (!response.ok) {
+      setRegisterErr("Please fill out the entire form");
+      setIsButtonAnimating(true);
+    } else {
+      const data = await response.json();
+      console.log(data);
+      runInAction(() => {
         store.user = data;
-        if (store.user) {
-          history.push("/featured-suggestions");
-        }
-        console.log(`Hello ${data.name}. Welcome!`);
+      });
+      if (store.user) {
+        history.push("/suggestions");
       }
-    } catch (err) {
-      console.log(err);
+      console.log(`Hello ${data.name}. Welcome!`);
     }
   };
   return (
     <div className="register-form" onSubmit={handlesRegister}>
       <form className="register-input-container">
+        <p style={{ color: "red" }}>{registerErr}</p>
         <h2>Create an account</h2>
-
         <RegisterFormInput
           type="text"
           icon="fa-user"

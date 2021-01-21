@@ -4,6 +4,7 @@ body {
   background-image: url("./images/testimage.jpg");
   font-family: "Gothic A1", sans-serif;
 }
+
 .site-main-outer {
   padding: 1em;
   margin-top: 5em;
@@ -35,15 +36,16 @@ input {
   background: transparent;
   justify-content: center;
   border: none;
-
   border-radius: 0.85em;
   outline: none;
   margin: 5px;
 }
+
 a {
   text-decoration: none;
   color: rgba(1, 1, 0.6, 0.4);
 }
+
 textarea {
   font-family: "Gothic A1", sans-serif;
   background: transparent;
@@ -57,7 +59,6 @@ textarea {
 }
 
 h2 {
-  /* margin: 0.5em; */
   text-align: center;
   color: rgba(0, 0, 0, 0.6);
 }
@@ -75,10 +76,12 @@ h4 {
   font-size: 16px;
   padding: 1em;
 }
+
 #footer {
   text-align: center;
   margin-top: 10%;
 }
+
 .footer-colors {
   color: rgb(0, 0, 0, 0.5);
 }
@@ -151,12 +154,15 @@ h4 {
   align-items: center;
   display: inline-flex;
 }
+
 #get-login-btn {
   margin-left: 1em;
 }
+
 .register-input-container .register-btn {
   margin: -0.3em;
 }
+
 .nav-bar-container {
   display: inline-flex;
   justify-content: center;
@@ -186,12 +192,6 @@ h4 {
   color: rgb(94, 115, 151);
 }
 
-/* .suggestion-box { */
-/* display: inline-block;
-  width: 40%;
-  text-align: center; */
-/* } */
-
 .settings {
   display: flex;
   justify-content: center;
@@ -203,6 +203,7 @@ h4 {
   padding: 0 3em;
   text-align: center;
 }
+
 .button-down,
 .button-up {
   background: transparent;
@@ -210,27 +211,40 @@ h4 {
   outline: none;
   color: rgb(94, 115, 151);
 }
+
 .button-up.active {
-  color: rgb(253, 226, 228);
+  color: red;
 }
 
 .button-down.active {
-  color: rgb(153, 193, 222);
+  color: blue;
+}
+
+.suggestion-form.ic-big {
+  align-items: flex-start;
+  padding-top: 0.5em;
 }
 
 .votes-container {
-  display: table-caption;
+  display: grid;
 }
 .votes-info-container {
+  display: inline-flex;
+}
+
+.votes-suggestion-container {
+  display: flex;
 }
 /* Modal styling */
 .App {
   text-align: center;
   padding-top: 2rem;
 }
+
 .private-features {
   display: flex;
 }
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -267,9 +281,11 @@ h4 {
   display: flex;
   justify-content: flex-end;
 }
+
 .modal p {
   text-align: center;
 }
+
 .modal-close-button {
   font-size: 1.4rem;
   font-weight: 700;
@@ -296,6 +312,7 @@ button {
   outline: none;
   cursor: pointer;
 }
+
 .button-default,
 .user-delete {
   color: rgb(130, 137, 152);

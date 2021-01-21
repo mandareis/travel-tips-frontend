@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useTravelStore } from "../TipsContext";
-import { observer } from "mobx-react";
 
-function VotesUpOrDown() {
-  let store = useTravelStore();
+function VotesUpOrDown(props) {
   const [direction, setDirection] = useState(0);
 
   // needs to display amount of votes
-  // change button color like reddit?
   // needs to warn user he must to sign up to vote
 
   useEffect(() => {
     async function fetchDirection() {
-      if (store.suggestion?.id) {
-        let response = await fetch(`/suggestions/${store.suggestion?.id}/vote`);
+      if (props.suggestion?.id) {
+        let response = await fetch(`/suggestions/${props.suggestion?.id}/vote`);
         if (response.ok) {
           let data = await response.json();
           if (data !== null) {
@@ -23,17 +19,18 @@ function VotesUpOrDown() {
       }
     }
     fetchDirection();
-  }, [store.suggestion?.id]);
+  }, [props.suggestion?.id]);
+
   let handlesVote = (desiredDirection) => {
     return async () => {
       if (desiredDirection === direction) {
-        await fetch(`/suggestions/${store.suggestion?.id}/vote`, {
+        await fetch(`/suggestions/${props.suggestion?.id}/vote`, {
           method: "DELETE",
         });
         setDirection(0);
         return;
       }
-      let response = await fetch(`/suggestions/${store.suggestion?.id}/vote`, {
+      let response = await fetch(`/suggestions/${props.suggestion?.id}/vote`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -70,4 +67,4 @@ function VotesUpOrDown() {
   );
 }
 
-export default observer(VotesUpOrDown);
+export default VotesUpOrDown;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
@@ -7,7 +7,7 @@ import { runInAction } from "mobx";
 
 const UpdateFormInput = (props) => {
   return (
-    <div className="register-form">
+    <div className="update-form">
       <div className="input-prefix-icon">
         <i className={`fas ${props.icon}`}></i>
       </div>
@@ -24,18 +24,19 @@ const UpdateFormInput = (props) => {
   );
 };
 
+//use message const to set successful message && password mismatch message
 function UpdateUser() {
   const store = useTravelStore();
   const [name, setName] = useState(store.user?.name || "");
   const [username, setUsername] = useState(store.user?.username || "");
   const [email, setEmail] = useState(store.user?.email || "");
-  const [registerErr, setRegisterErr] = useState(false);
+  const [err, setErr] = useState(false);
+  const [message, setMessage] = useState(null);
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
 
-  //if no user navigate away
   const getUpdateBtn = () => {
     let UpdateBtn = {};
-    if (registerErr && isButtonAnimating) {
+    if (err && isButtonAnimating) {
       UpdateBtn = {
         color: "#d62828",
       };
@@ -45,7 +46,7 @@ function UpdateUser() {
         <i className="fas fa-save fa-lg"></i>
       </button>
     );
-    if (registerErr && isButtonAnimating) {
+    if (err && isButtonAnimating) {
       const movement = 12;
       return (
         <motion.div
@@ -64,6 +65,15 @@ function UpdateUser() {
     return innerUpdateBtn;
   };
 
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   const handlesUpdate = async (e) => {
     e.preventDefault();
     let response = await fetch(`/users/${store.user.user_id}`, {
@@ -78,11 +88,11 @@ function UpdateUser() {
       }),
     });
     if (!response.ok) {
-      setRegisterErr(true);
+      setErr(true);
       setIsButtonAnimating(true);
     } else {
       const data = await response.json();
-      alert("User successfully updated");
+      setMessage("User successfully updated");
       console.log(data);
       runInAction(() => {
         store.user.name = name;
@@ -91,10 +101,12 @@ function UpdateUser() {
       });
     }
   };
+
   return (
     <div className="update-form" onSubmit={handlesUpdate}>
       <form className="register-input-container">
-        <h2>Update {store.user?.username}'s account information:</h2>
+        <p style={{ color: "green" }}>{message}</p>
+        <h2>Update {store.user?.username}'s account:</h2>
         <UpdateFormInput
           type="text"
           icon="fa-user"

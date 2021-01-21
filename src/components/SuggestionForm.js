@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
-import { motion } from "framer-motion";
 import { runInAction, toJS } from "mobx";
 import { useTravelStore } from "../TipsContext";
 
 const SuggestionFormInput = (props) => {
   return (
-    <div className="suggestion-form">
+    <div className={`suggestion-form ${props.longtext ? "ic-big" : ""}`}>
       <div className="input-prefix-icon">
         <i className={`fas ${props.icon}`}></i>
       </div>
@@ -61,7 +60,7 @@ const LocationAutocomplete = (props) => {
       });
       listenerRef.current = listener;
     }
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     if (autocompleteRef.current) {
@@ -98,7 +97,6 @@ function SuggestionForm() {
   const [place, setPlace] = useState(null);
   const [city, setCity] = useState(null);
   const [error, setError] = useState(null);
-  const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("US");
   const store = useTravelStore();
@@ -111,43 +109,18 @@ function SuggestionForm() {
     LoadCountries();
   }, []);
 
-  const getUpdateBtn = () => {
-    let updateBtn = {};
-    if (isButtonAnimating) {
-      updateBtn = {
-        color: "#d62828",
-      };
-    }
-    const innerUpdateBtn = (
-      <button type="submit" className="add-sug-btn" style={updateBtn}>
-        <i className="fas fa-paper-plane fa-lg"></i>
-      </button>
-    );
-
-    if (isButtonAnimating) {
-      const movement = 12;
-      return (
-        <div className="login">
-          <motion.div
-            onAnimationComplete={() => {
-              setIsButtonAnimating(false);
-            }}
-            animate={{
-              translateX: [0, -movement, movement, -movement, movement, 0],
-            }}
-            transition={{ duration: 0.6, ease: "easeInOut", loop: 0 }}
-          >
-            {innerUpdateBtn}
-          </motion.div>
-        </div>
-      );
-    }
-    return innerUpdateBtn;
-  };
+  // makes things disappear after certain time
+  // useEffect(() => {
+  //   if (error) {
+  //     const timer = setTimeout(() => {
+  //       setError(null);
+  //     }, 5000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [error]);
 
   const getCountriesList = async () => {
     // add try catch later
-    //figure out how to render error
     let response = await fetch("/places/countries-list");
     let data = await response.json();
     return data;
@@ -156,6 +129,10 @@ function SuggestionForm() {
   const handleAddSuggestion = async (e) => {
     e.preventDefault();
     let allCountries = await getCountriesList();
+    if (!store.user) {
+      setError("You must be logged in to create a suggestion.");
+      return;
+    }
     if (!place) {
       setError("Please select a place");
       return;
@@ -210,27 +187,24 @@ function SuggestionForm() {
       }),
     });
     if (!response.ok) {
-      //message of successfully created entry with a timer of 2seconds
-      setError("Please review your input");
+      setError("Did not work.");
       return;
     }
     let data = await response.json();
+    console.log(data);
     runInAction(() => {
       store.suggestion = data;
     });
-    console.log(toJS(store.suggestion));
+    // console.log(toJS(store.suggestion));
     history.push(`/suggestion/${data.id}`);
-
-    // console.log(matchingCountry);
   };
-
   return (
     <div className="suggestion-form">
       <form
         className="suggestion-form-container"
         onSubmit={handleAddSuggestion}
       >
-        {error}
+        <p style={{ color: "red" }}> {error}</p>
         <h4>Create a new suggestion:</h4>
         <select value={country} onChange={(e) => setCountry(e.target.value)}>
           {countries.map((c, id) => {
@@ -281,7 +255,11 @@ function SuggestionForm() {
           place: {JSON.stringify(place, null, 2)}
         </pre> */}
 
-        <div id="get-login-btn">{getUpdateBtn()}</div>
+        <div id="get-login-btn">
+          <button type="submit" className="add-sug-btn">
+            <i className="fas fa-paper-plane fa-lg"></i>
+          </button>
+        </div>
       </form>
     </div>
   );

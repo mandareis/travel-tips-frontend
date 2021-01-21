@@ -29,6 +29,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginErr, setLoginErr] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const store = useTravelStore();
 
@@ -66,6 +67,7 @@ function Login() {
     return innerLoginBtn;
   };
 
+  // add error message for username, and email uniqueness.
   const handlesLogin = async (e) => {
     e.preventDefault();
     let response = await fetch("/sessions", {
@@ -77,6 +79,7 @@ function Login() {
       body: JSON.stringify({ username, password }),
     });
     if (!response.ok) {
+      setErrMessage("Password or Username incorrect. Please try again.");
       setLoginErr(true);
       setIsButtonAnimating(true);
     } else {
@@ -84,7 +87,7 @@ function Login() {
       runInAction(() => {
         store.user = data;
         if (store.user) {
-          history.push("/featured-suggestions");
+          history.push("/suggestions");
         }
       });
       console.log(`Hello, ${data.username}`);
@@ -94,6 +97,7 @@ function Login() {
   return (
     <div className="login-form" onSubmit={handlesLogin}>
       <form className="form-container">
+        <p style={{ color: "red" }}>{errMessage}</p>
         <h2>Login</h2>
         <div className="login-input-container">
           <LoginFormInput

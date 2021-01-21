@@ -33,7 +33,7 @@ const PageContainer = ({ children }) => {
         store.user = null;
       });
       history.push("/");
-      alert("I've successfully logged user out");
+      alert("Successfully logged out!");
     }
   };
 
@@ -95,11 +95,14 @@ function App() {
               <UpdateUser />
             </PageContainer>
           </Route>
-          <Route path="/featured-suggestions">
-            <PageContainer>
-              <SuggestionsPage />
-            </PageContainer>
-          </Route>
+          <Route
+            path="/suggestions"
+            render={(routeProps) => (
+              <PageContainer>
+                <SuggestionsPage {...routeProps} />
+              </PageContainer>
+            )}
+          ></Route>
           <Route path="/change-password">
             <PageContainer>
               <ChangePassword />
