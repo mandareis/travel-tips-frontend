@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { observer, PropTypes } from "mobx-react";
+import { NavLink, useHistory } from "react-router-dom";
+import { observer } from "mobx-react";
 import { useTravelStore } from "../TipsContext";
 
 function NavBar(props) {
@@ -60,7 +60,7 @@ function NavBar(props) {
           <input
             id="input-sug"
             type="text"
-            value={search}
+            value={props.search}
             onChange={(e) => setSearch(e.target.value)}
             autoComplete="off"
             placeholder="search"

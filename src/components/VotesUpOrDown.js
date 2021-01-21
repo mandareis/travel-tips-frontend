@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function VotesUpOrDown(props) {
   const [direction, setDirection] = useState(0);
-
+  const [votes, setVotes] = useState(0);
   // needs to display amount of votes
   // needs to warn user he must to sign up to vote
 
@@ -48,6 +48,16 @@ function VotesUpOrDown(props) {
   let doUpvote = handlesVote(+1);
   let doDownvote = handlesVote(-1);
 
+  let getAmountOfVotes = async () => {
+    let response = await fetch(
+      `/suggestions/${props.suggestion?.id}/get_votes`
+    );
+
+    let data = await response.json();
+    console.log(data);
+    setVotes(data);
+  };
+  getAmountOfVotes();
   return (
     <div className="votes-container">
       <button
@@ -56,7 +66,7 @@ function VotesUpOrDown(props) {
       >
         <i className="fas fa-arrow-up"></i>
       </button>
-      <span># of votes</span>
+      <span>{votes}</span>
       <button
         className={`button-down ${direction === -1 ? "active" : ""}`}
         onClick={doDownvote}

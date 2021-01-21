@@ -196,7 +196,7 @@ function SuggestionForm() {
       store.suggestion = data;
     });
     // console.log(toJS(store.suggestion));
-    history.push(`/suggestion/${data.id}`);
+    history.push(`/suggestions/${data.id}`);
   };
   return (
     <div className="suggestion-form">

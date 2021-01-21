@@ -1,8 +1,8 @@
 /* styles the body of the site */
 
 body {
-  background-image: url("./images/testimage.jpg");
   font-family: "Gothic A1", sans-serif;
+  background-image: url("./images/testimage.jpg");
 }
 
 .site-main-outer {
@@ -233,11 +233,12 @@ h4 {
 }
 
 .votes-suggestion-container {
-  display: flex;
+  display: -webkit-box;
 }
 /* Modal styling */
 .App {
   text-align: center;
+
   padding-top: 2rem;
 }
 

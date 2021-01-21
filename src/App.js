@@ -5,7 +5,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Settings from "./components/Settings";
