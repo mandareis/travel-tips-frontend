@@ -68,6 +68,14 @@ function SuggestionsPage(props) {
               </div>
             );
           })}
+          <div className="paginate-btns">
+            <button type="button" className="paginate-left">
+              <i className="fas fa-arrow-alt-circle-left "></i>
+            </button>
+            <button type="button" className="paginate-left">
+              <i className="fas fa-arrow-alt-circle-right paginate-right"></i>
+            </button>
+          </div>
         </div>
       )}
     </div>

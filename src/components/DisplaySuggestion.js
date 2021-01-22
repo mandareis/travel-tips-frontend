@@ -2,7 +2,7 @@ import { runInAction, toJS } from "mobx";
 import React, { useState, useEffect } from "react";
 import { useTravelStore } from "../TipsContext";
 import VotesUpOrDown from "./VotesUpOrDown";
-import Comments from "./Comments";
+
 function DisplaySuggestion(props) {
   // might need refactoring
   //needs a try and catch  for errors
@@ -44,9 +44,6 @@ function DisplaySuggestion(props) {
               {store.suggestion.place.city}
             </p>
             <p>tags: {store.suggestion.labels}</p>
-            <div>
-              <Comments />
-            </div>
           </div>
         </div>
       )}

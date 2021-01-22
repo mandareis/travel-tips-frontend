@@ -119,7 +119,9 @@ h4 {
 .login-btn,
 .go-back-btn,
 .update-btn,
-.add-sug-btn {
+.add-sug-btn,
+.paginate-left,
+.paginate-right {
   background: transparent;
   border: none;
   outline: none;
@@ -136,7 +138,9 @@ h4 {
 .login-btn:hover,
 .go-back-btn:hover,
 .update-btn:hover,
-.add-sug-btn:hover {
+.add-sug-btn:hover,
+.paginate-left:hover,
+.paginate-right:hover {
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -144,8 +148,10 @@ h4 {
 .logiin-btn:active,
 .go-back-btn:active,
 .update-btn:active,
-.add-sug-btn:active {
-  color: rgba(0, 0, 0, 0.6);
+.add-sug-btn:active,
+.paginate-left:hover,
+.paginate-right:hover {
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .login-page-btn {
