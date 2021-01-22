@@ -64,14 +64,14 @@ function VotesUpOrDown(props) {
         className={`button-up ${direction === 1 ? "active" : ""}`}
         onClick={doUpvote}
       >
-        <i className="fas fa-arrow-up"></i>
+        <i className="fas fa-arrow-alt-circle-up"></i>
       </button>
       <span>{votes}</span>
       <button
         className={`button-down ${direction === -1 ? "active" : ""}`}
         onClick={doDownvote}
       >
-        <i className="fas fa-arrow-down "></i>
+        <i className="fas fa-arrow-alt-circle-down "></i>
       </button>
     </div>
   );

@@ -42,7 +42,7 @@ function Login() {
     }
     const innerLoginBtn = (
       <button type="submit" className="login-btn" style={loginBtn}>
-        <i className="fas fa-sign-in-alt fa-lg"></i>
+        <i className="fas fa-sign-in-alt fa-lg login-btn"></i>
       </button>
     );
 
@@ -118,7 +118,7 @@ function Login() {
         <div className="login-btns">
           <div id="navlink">
             <NavLink to="/">
-              <i className="fas fa-chevron-circle-left go-back-btn"></i>
+              <i className="fas fa-chevron-left  go-back-btn"></i>
             </NavLink>
           </div>
 

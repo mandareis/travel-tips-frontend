@@ -72,7 +72,6 @@ function ChangePassword() {
     e.preventDefault();
     try {
       if (newPassword !== passwordConfirm) {
-        // debugger;
         throw new Error("Password mismatch");
       }
       let response = await fetch(`/users/change-password`, {

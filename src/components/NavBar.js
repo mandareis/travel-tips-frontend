@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react";
 import { useTravelStore } from "../TipsContext";
 
 function NavBar(props) {
-  const history = useHistory();
-  const [search, setSearch] = useState(null);
   const store = useTravelStore();
 
-  const handlesRedirect = (e) => {
-    e.preventDefault();
-    history.push(`/suggestions?city=${encodeURIComponent(search)}`);
-  };
   const enableFeatures = () => {
     if (store.user?.user_id) {
       return (
@@ -33,7 +27,7 @@ function NavBar(props) {
           </div>
           <div id="sign-out-btn">
             <a href="#" onClick={props.onLogOut}>
-              <i className="fas fa-sign-out-alt fa-lg"></i>
+              <i className="fas fa-sign-out-alt fa-lg sign-out-btn"></i>
             </a>
           </div>
         </div>
@@ -48,26 +42,11 @@ function NavBar(props) {
           <i className="fas fa-home fa-lg"></i>
         </NavLink>
       </div>
-      <div id="sugs-btn">
+      <div id="nav-search-btn">
         <NavLink to="/suggestions">
-          <i className="fas fa-atlas fa-lg"></i>
+          <i className="fas fa-search fa-lg"></i>
         </NavLink>
       </div>
-
-      <div className="search-btn">
-        <i className="fas fa-search fa-lg"></i>
-        <form onSubmit={handlesRedirect}>
-          <input
-            id="input-sug"
-            type="text"
-            value={props.search}
-            onChange={(e) => setSearch(e.target.value)}
-            autoComplete="off"
-            placeholder="search"
-          />
-        </form>
-      </div>
-
       {enableFeatures()}
     </div>
   );

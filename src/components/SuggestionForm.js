@@ -109,16 +109,6 @@ function SuggestionForm() {
     LoadCountries();
   }, []);
 
-  // makes things disappear after certain time
-  // useEffect(() => {
-  //   if (error) {
-  //     const timer = setTimeout(() => {
-  //       setError(null);
-  //     }, 5000);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [error]);
-
   const getCountriesList = async () => {
     // add try catch later
     let response = await fetch("/places/countries-list");
@@ -207,7 +197,11 @@ function SuggestionForm() {
       >
         <p style={{ color: "red" }}> {error}</p>
         <h4>Create a new suggestion:</h4>
-        <select value={country} onChange={(e) => setCountry(e.target.value)}>
+        <select
+          className="select-container"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+        >
           {countries.map((c, id) => {
             return (
               <option value={c.code} key={id}>

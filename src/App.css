@@ -1,8 +1,8 @@
-/* styles the body of the site */
-
-body {
+html {
   font-family: "Gothic A1", sans-serif;
-  background-image: url("./images/testimage.jpg");
+  background-image: url("./images/Tokyo_valentine_low.jpg");
+  /* background-position-y: center;
+  background-position: center; */
 }
 
 .site-main-outer {
@@ -18,9 +18,9 @@ body {
 .site-main-inner {
   padding: 1em;
   border-radius: 0.75em;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   mix-blend-mode: multiply;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0px);
 }
 
 .register-input-container,
@@ -61,6 +61,7 @@ textarea {
 
 h2 {
   text-align: center;
+  margin-bottom: 1.5em;
   color: rgba(0, 0, 0, 0.6);
 }
 
@@ -72,6 +73,8 @@ h4 {
 }
 /* adds style to titles,input and a */
 
+.app-title {
+}
 /* styles footer */
 .footer-colors {
   text-decoration: none;
@@ -101,15 +104,17 @@ h4 {
 .register-form .input-prefix-icon,
 .login-form .input-prefix-icon,
 .update-form .input-prefix-icon,
-.suggestion-form .input-prefix-icon {
-  width: 16px;
+.suggestion-form .input-prefix-icon,
+.search-container .input-prefix-icon {
+  width: 25px;
   color: rgba(0, 0, 0, 0.3);
 }
 
 .register-form,
 .login-form,
 .update-form,
-.suggestion-form {
+.suggestion-form,
+.search-container {
   display: inline-flex;
   align-items: center;
   margin-bottom: 15px;
@@ -126,6 +131,13 @@ h4 {
   border: none;
   outline: none;
   color: rgba(0, 0, 0, 0.5);
+}
+
+.login-btn {
+  margin-top: 0em;
+}
+.delete-container .user-delete {
+  color: rgb(155, 155, 155);
 }
 
 #issues {
@@ -179,10 +191,12 @@ h4 {
 
 .nav-bar-container {
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
+  /* justify-content: center;
+  align-items: center; */
+  padding: 0.5em;
+  margin-top: 1em;
 
+  /* width: auto; */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75em;
   backdrop-filter: blur(10px);
@@ -194,10 +208,10 @@ h4 {
 #love-btn,
 #sign-out-btn,
 #config-btn,
-.search-btn,
+#nav-search-btn,
 #add-sug-btn,
 #sugs-btn {
-  padding: 1em;
+  padding: 1.5em;
 }
 
 .search-btn {
@@ -228,11 +242,11 @@ h4 {
 }
 
 .button-up.active {
-  color: red;
+  color: blue;
 }
 
 .button-down.active {
-  color: blue;
+  color: red;
 }
 
 .suggestion-form.ic-big {
@@ -242,9 +256,6 @@ h4 {
 
 .votes-container {
   display: grid;
-}
-.votes-info-container {
-  display: inline-flex;
 }
 
 .votes-suggestion-container {
@@ -347,4 +358,30 @@ button {
 
 .suggestion-intro-container {
   color: rgba(0, 0, 0, 0.6);
+}
+.search-container {
+  padding: 1em;
+}
+.search-container input {
+  text-align: center;
+}
+.search-container .input-prefix-icon {
+  align-items: center;
+  margin: 0em;
+}
+.paginate-container {
+  align-items: center;
+}
+.votes-info-container {
+  display: inline-flex;
+}
+
+.pac-container {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.select-container {
+  background-color: transparent;
+  border-radius: 0.95em;
+  outline: none;
 }

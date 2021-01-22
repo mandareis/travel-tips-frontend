@@ -40,6 +40,9 @@ const PageContainer = ({ children }) => {
   return (
     <div className="container">
       <div className="row ">
+        <div className="app-title">
+          <h2>ExploreTravel.tips</h2>
+        </div>
         <div className="col">
           <NavBar onLogOut={onLogOut} />
         </div>
