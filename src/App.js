@@ -23,7 +23,7 @@ import { runInAction } from "mobx";
 const PageContainer = ({ children }) => {
   let history = useHistory();
   const store = useTravelStore();
-
+  // const [message, setMessage] = useState("");
   const onLogOut = async () => {
     const response = await fetch("/sessions", {
       method: "DELETE",
@@ -33,10 +33,10 @@ const PageContainer = ({ children }) => {
         store.user = null;
       });
       history.push("/");
+      // setMessage("You've successfully logged out!");
       alert("Successfully logged out!");
     }
   };
-
   return (
     <div className="container">
       <div className="row ">
@@ -44,8 +44,8 @@ const PageContainer = ({ children }) => {
           <NavBar onLogOut={onLogOut} />
         </div>
       </div>
-      <div className="row">
-        <div className="col">
+      <div className="row ">
+        <div className="col ">
           <div className="site-main-outer">
             <div className="site-main-inner">{children}</div>
           </div>
@@ -77,7 +77,8 @@ function App() {
         <Switch>
           <Route exact path="/">
             <PageContainer>
-              <Register />
+              <Register></Register>
+              {/* {store.user ? <p>{message}</p> : null} */}
             </PageContainer>
           </Route>
           <Route path="/login">

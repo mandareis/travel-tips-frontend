@@ -8,53 +8,62 @@ function SuggestionsPage(props) {
   let params = parse(props.location.search);
   const [data, setData] = useState();
   const [err, setErr] = useState(false);
+  // const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [message, setMessage] = useState(null);
+
   const store = useTravelStore();
 
   useEffect(() => {
     async function fetchSearch() {
       try {
         let response = await fetch(`/suggestions?city=${params.city}`);
-
         if (!response.ok) {
-          setMessage("No suggestions were found for");
           setErr(true);
         } else {
           let data = await response.json();
           console.log(data);
-          setMessage("Here are your results for: ");
+          // setMessage("Here are your results for: ");
           setData(data);
           setErr(false);
           setIsLoading(false);
         }
       } catch (err) {
-        setErr(err.message);
+        setErr(true);
       }
     }
     fetchSearch();
   }, [params.city]);
 
   // apply message for search results
+  //check if the city is in the database
+  console.log(data);
   return (
     <div>
       {isLoading ? null : (
-        <div>
+        <div className="suggestion-intro-container">
           <h3>{store?.user ? `Hello ${store.user.name}. Welcome!` : null}</h3>
-          {data.map((s, id) => {
+          <p>
+            This app is here to help you find places to visit by searching for
+            it with a city's name. You can vote a place up if you have visited
+            there, and if you really hated this place, you can also vote it
+            down. I hope this app will inspire you on your next trip! Have fun!
+          </p>
+          {data ? (
+            <p>Here are your results for: {params.city} </p>
+          ) : (
+            <p>No suggestions were found for: </p>
+          )}
+          {data.map((s, idx) => {
             return (
-              <div className="votes-suggestion-container">
+              <div className="votes-suggestion-container" key={idx}>
                 <div>
                   <VotesUpOrDown suggestion={s} />
                 </div>
-                <div key={id}>
-                  <div style={{ display: "inline-flex" }}>
-                    <h5>{s.place.name} </h5>&nbsp;
-                    <h5> {s.title}</h5>
-                  </div>
-                  <p>
+                <div className="list-of-places-container">
+                  <a href={`/suggestion/${s.id}`}>{s.place.name}</a>
+                  <h5>
                     Location: {s.place.city},{s.place.country}
-                  </p>
+                  </h5>
                 </div>
               </div>
             );

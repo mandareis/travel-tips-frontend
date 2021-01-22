@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useTravelStore } from "../TipsContext";
 import { motion } from "framer-motion";
-import { observer } from "mobx-react";
 import { NavLink } from "react-router-dom";
-import { toJS } from "mobx";
 
 const UpdateFormInput = (props) => {
   return (
@@ -25,7 +22,6 @@ const UpdateFormInput = (props) => {
 };
 
 function ChangePassword() {
-  const store = useTravelStore();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -79,7 +75,6 @@ function ChangePassword() {
         // debugger;
         throw new Error("Password mismatch");
       }
-      console.log(toJS(store));
       let response = await fetch(`/users/change-password`, {
         method: "PUT",
         headers: {
@@ -150,4 +145,4 @@ function ChangePassword() {
     </div>
   );
 }
-export default observer(ChangePassword);
+export default ChangePassword;

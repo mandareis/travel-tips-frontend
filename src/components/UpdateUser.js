@@ -24,7 +24,6 @@ const UpdateFormInput = (props) => {
   );
 };
 
-//use message const to set successful message && password mismatch message
 function UpdateUser() {
   const store = useTravelStore();
   const [name, setName] = useState(store.user?.name || "");
@@ -90,22 +89,31 @@ function UpdateUser() {
     if (!response.ok) {
       setErr(true);
       setIsButtonAnimating(true);
+      setMessage("Username or email is already taken.");
     } else {
       const data = await response.json();
       setMessage("User successfully updated");
+      setErr(false);
       console.log(data);
       runInAction(() => {
         store.user.name = name;
         store.user.username = username;
         store.user.email = email;
       });
+      if (store.user.username === data.error) {
+      }
     }
   };
 
   return (
     <div className="update-form" onSubmit={handlesUpdate}>
       <form className="register-input-container">
-        <p style={{ color: "green" }}>{message}</p>
+        {err === false ? (
+          <p id="correct">{message}</p>
+        ) : (
+          <p id="issues">{message}</p>
+        )}
+
         <h2>Update {store.user?.username}'s account:</h2>
         <UpdateFormInput
           type="text"

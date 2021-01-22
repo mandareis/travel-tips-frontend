@@ -8,7 +8,7 @@ body {
 .site-main-outer {
   padding: 1em;
   margin-top: 5em;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #ffffff33;
   border-radius: 0.75em;
   backdrop-filter: blur(5px);
   -webkit-box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
@@ -39,6 +39,7 @@ input {
   border-radius: 0.85em;
   outline: none;
   margin: 5px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 a {
@@ -67,6 +68,7 @@ h4 {
   text-align: center;
   display: block;
   margin-block-start: 0em;
+  color: rgba(0, 0, 0, 0.7);
 }
 /* adds style to titles,input and a */
 
@@ -124,6 +126,12 @@ h4 {
   color: rgba(0, 0, 0, 0.5);
 }
 
+#issues {
+  color: red;
+}
+#correct {
+  color: green;
+}
 .register-btn:hover,
 .login-btn:hover,
 .go-back-btn:hover,
@@ -193,9 +201,10 @@ h4 {
 }
 
 .settings {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
-  margin-top: 1em;
+  margin-top: 2em;
+  padding: 1em;
 }
 
 .settings #user-edit,
@@ -329,3 +338,7 @@ button {
   padding: 0.4em;
 }
 /* Modal styling */
+
+.suggestion-intro-container {
+  color: rgba(0, 0, 0, 0.6);
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 function VotesUpOrDown(props) {
   const [direction, setDirection] = useState(0);
   const [votes, setVotes] = useState(0);
-  // needs to display amount of votes
+
   // needs to warn user he must to sign up to vote
 
   useEffect(() => {

@@ -195,9 +195,10 @@ function SuggestionForm() {
     runInAction(() => {
       store.suggestion = data;
     });
-    // console.log(toJS(store.suggestion));
-    history.push(`/suggestions/${data.id}`);
+    history.push(`/suggestion/${data.id}`);
+    console.log(toJS(store.suggestion));
   };
+
   return (
     <div className="suggestion-form">
       <form

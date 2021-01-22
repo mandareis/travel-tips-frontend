@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import { useTravelStore } from "../TipsContext";
 import { useHistory } from "react-router-dom";
 import ReactDOM from "react-dom";
+import { runInAction } from "mobx";
 
 const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
@@ -60,6 +61,7 @@ const Modal = ({ isShowing, hide, onDelete, user }) =>
 function DeleteUser() {
   let history = useHistory();
   const { isShowing, toggle } = useModal();
+
   const store = useTravelStore();
 
   const handlesDeleteUser = async () => {
@@ -67,8 +69,14 @@ function DeleteUser() {
       method: "DELETE",
     });
     if (!response.ok) {
-      history.push("/");
+      console.log("Something is not right");
+    } else {
+      runInAction(() => {
+        store.user = null;
+      });
+      //somehow send a successfully deleted message to load on Register?
       toggle();
+      history.push("/");
     }
   };
   return (
