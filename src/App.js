@@ -34,7 +34,7 @@ const PageContainer = ({ children }) => {
       });
       history.push("/");
       // setMessage("You've successfully logged out!");
-      alert("Successfully logged out!");
+      // alert("Successfully logged out!");
     }
   };
   return (
@@ -54,7 +54,7 @@ const PageContainer = ({ children }) => {
           </div>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="col">
           <div id="footer">
             <a
@@ -68,7 +68,7 @@ const PageContainer = ({ children }) => {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -80,8 +80,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <PageContainer>
-              <Register></Register>
-              {/* {store.user ? <p>{message}</p> : null} */}
+              <Register />
             </PageContainer>
           </Route>
           <Route path="/login">
@@ -104,6 +103,7 @@ function App() {
             render={(routeProps) => (
               <PageContainer>
                 <SuggestionsPage {...routeProps} />
+                {console.log(routeProps)}
               </PageContainer>
             )}
           ></Route>

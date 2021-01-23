@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { observer } from "mobx-react";
+import { withIsLoggedOut } from "./withIsLoggedOut";
+// could move the updateforminput to its own file
 
 const UpdateFormInput = (props) => {
   return (
@@ -59,14 +62,6 @@ function ChangePassword() {
     }
     return innerUpdateBtn;
   };
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        setMessage(null);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
 
   const handlesUpdate = async (e) => {
     e.preventDefault();
@@ -100,15 +95,22 @@ function ChangePassword() {
       setIsButtonAnimating(true);
     }
   };
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
   return (
     <div className="update-form" onSubmit={handlesUpdate}>
-      <form className="register-input-container">
+      <form className="password-input-container">
         {message && !err ? (
           <p style={{ color: "green" }}>{message}</p>
         ) : (
           <p style={{ color: "red" }}>{message}</p>
         )}
-
         <h2>Update password:</h2>
         <UpdateFormInput
           type="password"
@@ -135,13 +137,13 @@ function ChangePassword() {
           onChange={(e) => setPasswordConfirm(e.target.value)}
         />
         <div id="navlink">
-          <NavLink to="/settings">
+          <Link to="/settings">
             <i className="fas fa-chevron-circle-left go-back-btn"></i>
-          </NavLink>
+          </Link>
           <div className="update-btn">{getUpdateBtn()}</div>
         </div>
       </form>
     </div>
   );
 }
-export default ChangePassword;
+export default withIsLoggedOut(observer(ChangePassword));

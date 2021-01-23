@@ -4,7 +4,7 @@ import { useTravelStore } from "../TipsContext";
 import { useHistory } from "react-router-dom";
 import ReactDOM from "react-dom";
 import { runInAction } from "mobx";
-
+import { withIsLoggedOut } from "./withIsLoggedOut";
 const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
   function toggle() {
@@ -29,6 +29,7 @@ const Modal = ({ isShowing, hide, onDelete, user }) =>
             role="dialog"
           >
             <div className="modal">
+              <div className="inner-modal"> </div>
               <div className="modal-header">
                 <button
                   type="button"
@@ -61,7 +62,6 @@ const Modal = ({ isShowing, hide, onDelete, user }) =>
 function DeleteUser() {
   let history = useHistory();
   const { isShowing, toggle } = useModal();
-
   const store = useTravelStore();
 
   const handlesDeleteUser = async () => {
@@ -73,8 +73,8 @@ function DeleteUser() {
     } else {
       runInAction(() => {
         store.user = null;
+        store.successfullyDeletedUser = true;
       });
-      //somehow send a successfully deleted message to load on Register?
       toggle();
       history.push("/");
     }
@@ -95,4 +95,4 @@ function DeleteUser() {
   );
 }
 
-export default observer(DeleteUser);
+export default withIsLoggedOut(observer(DeleteUser));

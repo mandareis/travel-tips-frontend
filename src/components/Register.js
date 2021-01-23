@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { NavLink, useHistory } from "react-router-dom";
 import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
-import { runInAction } from "mobx";
+import { runInAction, action } from "mobx";
 
 const RegisterFormInput = (props) => {
   return (
@@ -31,6 +31,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [registerErr, setRegisterErr] = useState(null);
+  const [message, setMessage] = useState("");
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const store = useTravelStore();
 
@@ -96,10 +97,24 @@ function Register() {
       console.log(`Hello ${data.name}. Welcome!`);
     }
   };
+  useEffect(() => {
+    const timer = setTimeout(
+      action(() => {
+        store.successfullyDeletedUser = null;
+      }),
+      2000
+    );
+    return () => clearTimeout(timer);
+  }, [store.successfullyDeletedUser, store]);
   return (
     <div className="register-form" onSubmit={handlesRegister}>
       <form className="register-input-container">
         <p style={{ color: "red" }}>{registerErr}</p>
+        {store.successfullyDeletedUser === true ? (
+          <p style={{ color: "green" }}>
+            You've successfully deleted your account.
+          </p>
+        ) : null}
         <h2>Create an account</h2>
         <RegisterFormInput
           type="text"
@@ -141,7 +156,7 @@ function Register() {
           value={password_confirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
-        <div className="register-btn">{getRegisterBtn()}</div>
+        <div className="register">{getRegisterBtn()}</div>
         <div className="login-account">
           <h5>
             Already have an account?

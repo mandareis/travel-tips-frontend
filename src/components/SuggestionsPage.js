@@ -22,6 +22,7 @@ function SuggestionsPage(props) {
         let response = await fetch(`/suggestions?city=${params.city}`);
         if (!response.ok) {
           setErr(true);
+          // setMessage("Please fill out the entire form.");
         } else {
           let data = await response.json();
           console.log(data);
@@ -32,6 +33,7 @@ function SuggestionsPage(props) {
         }
       } catch (err) {
         setErr(true);
+        // setMessage(err.message);
       }
     }
     fetchSearch();
@@ -51,9 +53,9 @@ function SuggestionsPage(props) {
           <h3>{store?.user ? `Hello ${store.user.name}. Welcome!` : null}</h3>
           <p>
             This app is here to help you find places to visit by searching for
-            it with a city's name. You can vote a place up if you have visited
-            there, and if you really hated this place, you can also vote it
-            down. I hope this app will inspire you on your next trip! Have fun!
+            it with a city's name. You can vote a place up if you have visited,
+            and if you really did not like it there, you can also vote it down.
+            I hope this app will inspire you on your next trip! Have fun!
           </p>
           <div className="search-container">
             <div className="input-prefix-icon">

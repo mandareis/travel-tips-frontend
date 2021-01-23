@@ -18,12 +18,13 @@ html {
 .site-main-inner {
   padding: 1em;
   border-radius: 0.75em;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.6);
   mix-blend-mode: multiply;
-  backdrop-filter: blur(0px);
+  backdrop-filter: blur(15px);
 }
 
 .register-input-container,
+.password-input-container,
 .login-input-container,
 .update-form,
 .suggestion-form-container {
@@ -128,7 +129,10 @@ h4 {
 .paginate-left,
 .paginate-right {
   background: transparent;
-  border: none;
+  /* backdrop-filter: blur(5px);
+  align-items: center;
+  border: 1px solid #ffffff33;
+  border-radius: 0.75em; */
   outline: none;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -261,15 +265,13 @@ h4 {
 .votes-suggestion-container {
   display: -webkit-box;
 }
+.private-features {
+  display: flex;
+}
 /* Modal styling */
 .App {
   text-align: center;
-
   padding-top: 2rem;
-}
-
-.private-features {
-  display: flex;
 }
 
 .modal-overlay {
@@ -297,11 +299,12 @@ h4 {
 
 .modal {
   z-index: 100;
-  background: white;
+  background-color: rgba(255, 255, 255, 0.7);
   margin: 5rem auto;
   border-radius: 0.75em;
   max-width: 500px;
   padding: 2rem;
+  backdrop-filter: blur(5px);
 }
 
 .modal-header {
@@ -327,6 +330,7 @@ button {
   font-size: 0.9rem;
   font-weight: 700;
   border: none;
+  color: rgba(0, 0, 0, 0.6);
   border-radius: 3px;
   padding: 0.3rem 1rem;
   outline: none;
@@ -376,12 +380,9 @@ button {
   display: inline-flex;
 }
 
-.pac-container {
-  color: rgba(0, 0, 0, 0.6);
-}
-
 .select-container {
   background-color: transparent;
-  border-radius: 0.95em;
+  border-radius: 1.5em;
   outline: none;
+  margin-bottom: 15px;
 }

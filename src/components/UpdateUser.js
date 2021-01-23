@@ -4,6 +4,7 @@ import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
 import { NavLink } from "react-router-dom";
 import { runInAction } from "mobx";
+import { withIsLoggedOut } from "./withIsLoggedOut";
 
 const UpdateFormInput = (props) => {
   return (
@@ -94,7 +95,7 @@ function UpdateUser() {
       const data = await response.json();
       setMessage("User successfully updated");
       setErr(false);
-      console.log(data);
+      // console.log(data);
       runInAction(() => {
         store.user.name = name;
         store.user.username = username;
@@ -153,4 +154,4 @@ function UpdateUser() {
   );
 }
 
-export default observer(UpdateUser);
+export default withIsLoggedOut(observer(UpdateUser));

@@ -118,7 +118,7 @@ function Login() {
         <div className="login-btns">
           <div id="navlink">
             <NavLink to="/">
-              <i className="fas fa-chevron-left  go-back-btn"></i>
+              <i className="fas fa-chevron-left go-back-btn"></i>
             </NavLink>
           </div>
 

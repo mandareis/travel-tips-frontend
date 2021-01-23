@@ -7,7 +7,6 @@ function DisplaySuggestion(props) {
   // might need refactoring
   //needs a try and catch  for errors
   const [isLoading, setIsLoadding] = useState(true);
-
   const store = useTravelStore();
 
   useEffect(() => {
@@ -36,7 +35,7 @@ function DisplaySuggestion(props) {
             <VotesUpOrDown suggestion={toJS(store.suggestion)} />
           </div>
           <div className="suggestion-box">
-            <h3>{store.suggestion.title}</h3>
+            <h2>{store.suggestion.title}</h2>
             <p>"{store.suggestion.description}"</p>
             <p>
               Continent: {store.suggestion.place.continent}, Country: &nbsp;

@@ -177,16 +177,17 @@ function SuggestionForm() {
       }),
     });
     if (!response.ok) {
-      setError("Did not work.");
+      setError("Please fill out the entire form.");
       return;
+    } else {
+      let data = await response.json();
+      console.log(data);
+      runInAction(() => {
+        store.suggestion = data;
+      });
+      history.push(`/suggestion/${data.id}`);
+      console.log(toJS(store.suggestion));
     }
-    let data = await response.json();
-    console.log(data);
-    runInAction(() => {
-      store.suggestion = data;
-    });
-    history.push(`/suggestion/${data.id}`);
-    console.log(toJS(store.suggestion));
   };
 
   return (
@@ -249,7 +250,6 @@ function SuggestionForm() {
         {/* <pre style={{ width: "100%", textAlign: "left" }}>
           place: {JSON.stringify(place, null, 2)}
         </pre> */}
-
         <div id="get-login-btn">
           <button type="submit" className="add-sug-btn">
             <i className="fas fa-paper-plane fa-lg"></i>
