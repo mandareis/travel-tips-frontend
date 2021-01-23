@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useTravelStore } from "../TipsContext";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react-lite";
+import { withIsLoggedIn } from "./withIsLoggedIn";
 
 const LoginFormInput = (props) => {
   return (
@@ -128,4 +129,4 @@ function Login() {
     </div>
   );
 }
-export default observer(Login);
+export default withIsLoggedIn(observer(Login));

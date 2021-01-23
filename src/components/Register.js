@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useTravelStore } from "../TipsContext";
 import { observer } from "mobx-react";
 import { runInAction, action } from "mobx";
+import { withIsLoggedIn } from "./withIsLoggedIn";
 
 const RegisterFormInput = (props) => {
   return (
@@ -31,7 +32,6 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [registerErr, setRegisterErr] = useState(null);
-  const [message, setMessage] = useState("");
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
   const store = useTravelStore();
 
@@ -65,7 +65,7 @@ function Register() {
     }
     return innerRegisterBtn;
   };
-  // add error message for username, and email uniqueness.
+
   const handlesRegister = async (e) => {
     e.preventDefault();
     let response = await fetch("/sessions/register", {
@@ -168,4 +168,4 @@ function Register() {
   );
 }
 
-export default observer(Register);
+export default withIsLoggedIn(observer(Register));

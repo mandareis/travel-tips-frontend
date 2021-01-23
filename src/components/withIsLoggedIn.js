@@ -7,7 +7,7 @@ const useAuthentication = () => {
   const history = useHistory();
   useEffect(() => {
     if (store.user) {
-      // logic to hide home
+      history.push("/suggestions");
     }
   }, [history, store.user]);
 };

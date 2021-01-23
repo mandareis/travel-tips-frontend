@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react";
 import { useTravelStore } from "../TipsContext";
@@ -34,14 +34,16 @@ function NavBar(props) {
       );
     }
   };
-
   return (
     <div className="nav-bar-container">
-      <div id="home-btn">
-        <NavLink to="/">
-          <i className="fas fa-home fa-lg"></i>
-        </NavLink>
-      </div>
+      {!store.user?.user_id ? (
+        <div id="home-btn">
+          <NavLink to="/">
+            <i className="fas fa-home fa-lg"></i>
+          </NavLink>
+        </div>
+      ) : null}
+
       <div id="nav-search-btn">
         <NavLink to="/suggestions">
           <i className="fas fa-search fa-lg"></i>
