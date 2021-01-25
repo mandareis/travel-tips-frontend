@@ -2,6 +2,7 @@ import { runInAction, toJS } from "mobx";
 import React, { useState, useEffect } from "react";
 import { useTravelStore } from "../TipsContext";
 import VotesUpOrDown from "./VotesUpOrDown";
+import {observer} from "mobx-react"
 
 function DisplaySuggestion(props) {
   // might need refactoring
@@ -50,4 +51,4 @@ function DisplaySuggestion(props) {
   );
 }
 
-export default DisplaySuggestion;
+export default observer(DisplaySuggestion)

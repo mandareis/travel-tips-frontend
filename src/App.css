@@ -1,17 +1,16 @@
         html {
   font-family: "Gothic A1", sans-serif;
-  background-image: url("./images/Tokyo_valentine_low.jpg");
+  background-image: url("./images/balloon.jpg");
   background-size: cover;
-  /* background-position-y: center;
-  background-position: center; */
 }
 
 .site-main-outer {
   padding: 1em;
-  margin-top: 5em;
+  margin-top: 3em;
   border: 1px solid #ffffff33;
   border-radius: 0.75em;
   backdrop-filter: blur(7px);
+  background-color: rgba(255, 255, 255, 0.2);
   -webkit-box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
   box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
 }
@@ -44,7 +43,7 @@ input {
 
 a {
   text-decoration: none;
-  color: rgba(1, 1, 0.6, 0.4);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 textarea {
@@ -73,7 +72,9 @@ h4 {
 }
 /* adds style to titles,input and a */
 
-.app-title {
+#title {
+  font-family: 'Pompiere', cursive;
+  font-size: 45px;
 }
 /* styles footer */
 .footer-colors {
@@ -121,9 +122,8 @@ h4 {
 }
 
 .register-btn,
-.login-btn,
-.go-back-btn,
 .update-btn,
+/* .go-back-btn, */
 .add-sug-btn,
 .paginate-left,
 .paginate-right {
@@ -136,12 +136,13 @@ h4 {
   color: rgba(0, 0, 0, 0.5);
 }
 
-.login-btn {
+.login-btn,
+.go-back-btn {
+  background: transparent;
+  outline: none;
   margin-top: 0em;
 }
-.delete-container .user-delete {
-  color: rgb(155, 155, 155);
-}
+
 
 #issues {
   color: red;
@@ -197,9 +198,10 @@ h4 {
   margin: 1em;
   padding: 0.5em;
   margin-top: 1em;
+  background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75em;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(7px);
   -webkit-box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
   box-shadow: 0px 10px 14px -3px rgba(0, 0, 0, 0.45);
 }
@@ -223,14 +225,15 @@ h4 {
 }
 
 .settings {
-  /* display: flex; */
+  display: inline-flex;
   justify-content: center;
   margin-top: 2em;
   padding: 1em;
 }
 
 .settings #user-edit,
-.settings .user-delete {
+.settings #user-delete,
+.settings #user-password {
   padding: 0 3em;
   text-align: center;
 }
@@ -259,6 +262,7 @@ h4 {
 .votes-container {
   display: grid;
 }
+
 
 .votes-suggestion-container {
   display: -webkit-box;
@@ -344,7 +348,7 @@ button {
 
 .button-default,
 .user-delete {
-  color: rgb(130, 137, 152);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .delete-account-btns {

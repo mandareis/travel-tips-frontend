@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useTravelStore } from "../TipsContext";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react-lite";
@@ -38,7 +38,7 @@ function Login() {
     let loginBtn = {};
     if (loginErr && isButtonAnimating) {
       loginBtn = {
-        color: "#d62828",
+        color:  "#d62828",
       };
     }
     const innerLoginBtn = (
@@ -118,9 +118,9 @@ function Login() {
         </div>
         <div className="login-btns">
           <div id="navlink">
-            <NavLink to="/">
+            <Link to="/">
               <i className="fas fa-chevron-left go-back-btn"></i>
-            </NavLink>
+            </Link>
           </div>
 
           <div id="get-login-btn">{getLoginBtn()}</div>

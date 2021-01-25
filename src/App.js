@@ -5,7 +5,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Settings from "./components/Settings";
@@ -18,7 +18,8 @@ import SuggestionForm from "./components/SuggestionForm";
 import Favorites from "./components/Favorites";
 import { observer } from "mobx-react";
 import { useTravelStore } from "./TipsContext";
-import { runInAction } from "mobx";
+import { runInAction, action } from "mobx";
+
 
 const PageContainer = ({ children }) => {
   let history = useHistory();
@@ -31,17 +32,27 @@ const PageContainer = ({ children }) => {
     if (response.ok) {
       runInAction(() => {
         store.user = null;
+        store.successfullyLoggedOut = true;
       });
       history.push("/");
-      // setMessage("You've successfully logged out!");
-      // alert("Successfully logged out!");
+      
     }
   };
+  useEffect(() => {
+    const timer = setTimeout(
+      action(() => {
+        store.successfullyLoggedOut = null;
+      }),
+      2000
+    );
+    return () => clearTimeout(timer);
+  }, [store.successfullyLoggedOut, store]);
+
   return (
     <div className="container">
       <div className="row ">
         <div className="app-title">
-          <h2>ExploreTravel.tips</h2>
+          <a href="/" id="title">ExploreTravel.tips</a>
         </div>
         <div className="col">
           <NavBar onLogOut={onLogOut} />
@@ -102,7 +113,16 @@ function App() {
             <PageContainer>
               <Favorites />
             </PageContainer>
-          </Route>
+          </Route> 
+          <Route
+            path="/suggestion/:id"
+            render={(routeProps) => (
+              <PageContainer>
+                <DisplaySuggestion params={routeProps.match.params} />
+              </PageContainer>
+            )}
+          />
+         
           <Route path="/add-suggestion">
             <PageContainer>
               <SuggestionForm />
@@ -121,16 +141,6 @@ function App() {
               <ChangePassword />
             </PageContainer>
           </Route>
-         
-          <Route
-            path="/suggestion/:id"
-            render={(routeProps) => (
-              <PageContainer>
-                <DisplaySuggestion params={routeProps.match.params} />
-              </PageContainer>
-            )}
-          />
-         
         </Switch>
       </Router>
     </div>

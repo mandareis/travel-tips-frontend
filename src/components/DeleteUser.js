@@ -81,10 +81,10 @@ function DeleteUser() {
   };
   return (
     <div className="delete-container">
-      <span className="button-default" onClick={toggle}>
+      <div className="button-default" onClick={toggle}>
         <i className="fas fa-user-times fa-2x user-delete"></i>
         <p>Delete User</p>
-      </span>
+      </div>
       <Modal
         isShowing={isShowing}
         hide={toggle}

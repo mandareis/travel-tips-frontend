@@ -97,24 +97,12 @@ function Register() {
       console.log(`Hello ${data.name}. Welcome!`);
     }
   };
-  useEffect(() => {
-    const timer = setTimeout(
-      action(() => {
-        store.successfullyDeletedUser = null;
-      }),
-      2000
-    );
-    return () => clearTimeout(timer);
-  }, [store.successfullyDeletedUser, store]);
+
   return (
     <div className="register-form" onSubmit={handlesRegister}>
       <form className="register-input-container">
         <p style={{ color: "red" }}>{registerErr}</p>
-        {store.successfullyDeletedUser === true ? (
-          <p style={{ color: "green" }}>
-            You've successfully deleted your account.
-          </p>
-        ) : null}
+       
         <h2>Create an account</h2>
         <RegisterFormInput
           type="text"

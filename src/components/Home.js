@@ -4,6 +4,7 @@ import { useTravelStore } from "../TipsContext";
 import { parse } from "query-string";
 import { useHistory } from "react-router-dom";
 import VotesUpOrDown from "./VotesUpOrDown";
+import {action } from "mobx"
 
 function Home(props) {
   let params = parse(props.location.search);
@@ -45,9 +46,29 @@ function Home(props) {
   };
   // apply message for search results
   //check if the city is in the database
-  console.log(data);
+
+  useEffect(() => {
+    const timer = setTimeout(
+      action(() => {
+        store.successfullyDeletedUser = null;
+      }),
+      2000
+    );
+    return () => clearTimeout(timer);
+  }, [store.successfullyDeletedUser, store]);
+
   return (
     <div>
+       {store.successfullyDeletedUser === true ? (
+          <p style={{ color: "green" }}>
+            You've successfully deleted your account.
+          </p>
+        ) : null}
+        {store.successfullyLoggedOut === true ? (
+          <p style={{ color: "green" }}>
+            You've successfully logged out.
+          </p>
+        ) : null}
       {isLoading ? null : (
         <div className="suggestion-intro-container">
           <h3>{store?.user ? `Hello ${store.user.name}. Welcome!` : null}</h3>

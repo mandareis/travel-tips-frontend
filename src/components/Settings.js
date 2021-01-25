@@ -11,13 +11,13 @@ function Settings() {
           <p>Update User</p>
         </NavLink>
       </div>
-      <div id="user-edit">
+      <div id="user-password">
         <NavLink to="/change-password">
           <i className="fas fa-key fa-2x"></i>
           <p>Change Password</p>
         </NavLink>
       </div>
-      <div className="user-delete">
+      <div id="user-delete">
         <DeleteUser />
       </div>
     </div>
