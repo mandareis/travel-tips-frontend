@@ -20,7 +20,6 @@ import { observer } from "mobx-react";
 import { useTravelStore } from "./TipsContext";
 import { runInAction, action } from "mobx";
 
-
 const PageContainer = ({ children }) => {
   let history = useHistory();
   const store = useTravelStore();
@@ -35,7 +34,6 @@ const PageContainer = ({ children }) => {
         store.successfullyLoggedOut = true;
       });
       history.push("/");
-      
     }
   };
   useEffect(() => {
@@ -52,7 +50,9 @@ const PageContainer = ({ children }) => {
     <div className="container">
       <div className="row ">
         <div className="app-title">
-          <a href="/" id="title">ExploreTravel.tips</a>
+          <a href="/" id="title">
+            ExploreTravel.tips
+          </a>
         </div>
         <div className="col">
           <NavBar onLogOut={onLogOut} />
@@ -113,7 +113,7 @@ function App() {
             <PageContainer>
               <Favorites />
             </PageContainer>
-          </Route> 
+          </Route>
           <Route
             path="/suggestion/:id"
             render={(routeProps) => (
@@ -122,7 +122,11 @@ function App() {
               </PageContainer>
             )}
           />
-         
+          <Route path="/change-password">
+            <PageContainer>
+              <ChangePassword />
+            </PageContainer>
+          </Route>
           <Route path="/add-suggestion">
             <PageContainer>
               <SuggestionForm />
@@ -136,11 +140,6 @@ function App() {
               </PageContainer>
             )}
           ></Route>
-          <Route path="/change-password">
-            <PageContainer>
-              <ChangePassword />
-            </PageContainer>
-          </Route>
         </Switch>
       </Router>
     </div>

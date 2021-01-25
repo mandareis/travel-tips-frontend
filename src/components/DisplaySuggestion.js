@@ -6,7 +6,8 @@ import {observer} from "mobx-react"
 
 function DisplaySuggestion(props) {
   // might need refactoring
-  //needs a try and catch  for errors
+  // needs a try and catch  for errors
+  // fix layout for votes, possibly by adding a row.
   const [isLoading, setIsLoadding] = useState(true);
   const store = useTravelStore();
 

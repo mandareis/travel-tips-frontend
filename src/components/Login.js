@@ -79,12 +79,16 @@ function Login() {
       },
       body: JSON.stringify({ username, password }),
     });
-    if (!response.ok) {
-      setErrMessage("Password or Username incorrect. Please try again.");
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      let message = "Password or Username incorrect. Please try again.";
+      if (data.error) {
+        message = data.error;
+      }
+      setErrMessage(message);
       setLoginErr(true);
       setIsButtonAnimating(true);
     } else {
-      const data = await response.json();
       runInAction(() => {
         store.user = data;
         if (store.user) {
