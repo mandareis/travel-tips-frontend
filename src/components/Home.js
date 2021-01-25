@@ -12,7 +12,6 @@ function Home(props) {
   // const [err, setErr] = useState(false);
   const history = useHistory();
   const [search, setSearch] = useState(null);
-  // const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const store = useTravelStore();
@@ -109,31 +108,34 @@ function Home(props) {
             {data.length > 0 ? (
               <p>Here are your results for: {params.city} </p>
             ) : (
-              <p>No suggestions were found for: {params.city}</p>
+              <p>No results were found for {params.city}</p>
             )}
+
             {data.map((s, idx) => {
               return (
-                <div className="votes-suggestion-container" key={idx}>
-                  <div>
-                    <VotesUpOrDown suggestion={s} />
+                <div>
+                  <div className="votes-suggestion-container" key={idx}>
+                    <div>
+                      <VotesUpOrDown suggestion={s} />
+                    </div>
+                    <div className="list-of-places-container">
+                      <a href={`/suggestion/${s.id}`}>{s.place.name}</a>
+                      <h5>
+                        Location: {s.place.city},{s.place.country}
+                      </h5>
+                    </div>
                   </div>
-                  <div className="list-of-places-container">
-                    <a href={`/suggestion/${s.id}`}>{s.place.name}</a>
-                    <h5>
-                      Location: {s.place.city},{s.place.country}
-                    </h5>
+                  <div className="paginate-container">
+                    <button type="button" className="paginate-left">
+                      <i className="fas fa-arrow-alt-circle-left "></i>
+                    </button>
+                    <button type="button" className="paginate-left">
+                      <i className="fas fa-arrow-alt-circle-right paginate-right"></i>
+                    </button>
                   </div>
                 </div>
               );
             })}
-            <div className="paginate-container">
-              <button type="button" className="paginate-left">
-                <i className="fas fa-arrow-alt-circle-left "></i>
-              </button>
-              <button type="button" className="paginate-left">
-                <i className="fas fa-arrow-alt-circle-right paginate-right"></i>
-              </button>
-            </div>
           </>
         )}
       </div>

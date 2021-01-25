@@ -19,6 +19,7 @@ const RegisterFormInput = (props) => {
           onChange={props.onChange}
           autoComplete="off"
           placeholder={props.placeholder}
+          required={props.required}
         />
       </div>
     </div>
@@ -83,6 +84,7 @@ function Register() {
       }),
     });
     if (!response.ok) {
+      //inform user if email is invalid or username & password length
       setRegisterErr("Please fill out the entire form");
       setIsButtonAnimating(true);
     } else {
@@ -94,7 +96,7 @@ function Register() {
       if (store.user) {
         history.push("/");
       }
-      console.log(`Hello ${data.name}. Welcome!`);
+      // console.log(`Hello ${data.name}. Welcome!`);
     }
   };
 
@@ -102,7 +104,7 @@ function Register() {
     <div className="register-form" onSubmit={handlesRegister}>
       <form className="register-input-container">
         <p style={{ color: "red" }}>{registerErr}</p>
-       
+
         <h2>Create an account</h2>
         <RegisterFormInput
           type="text"
@@ -111,6 +113,7 @@ function Register() {
           value={name}
           name="name"
           onChange={(e) => setName(e.target.value)}
+          required="required"
         />
         <RegisterFormInput
           type="text"
@@ -119,6 +122,7 @@ function Register() {
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required="required"
         />
         <RegisterFormInput
           type="text"
@@ -127,6 +131,7 @@ function Register() {
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required="required"
         />
         <RegisterFormInput
           type="password"
@@ -135,6 +140,7 @@ function Register() {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required="required"
         />
         <RegisterFormInput
           type="password"
@@ -143,6 +149,7 @@ function Register() {
           placeholder="Confirm Password"
           value={password_confirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
+          required="required"
         />
         <div className="register">{getRegisterBtn()}</div>
         <div className="login-account">

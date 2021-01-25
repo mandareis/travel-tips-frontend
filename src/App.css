@@ -268,7 +268,7 @@ h4 {
 
 
 .votes-suggestion-container {
-  display: -webkit-box;
+  display: flex;
 }
 .private-features {
   display: flex;
@@ -375,11 +375,13 @@ button {
   text-align: center;
 }
 .search-container .input-prefix-icon {
-  align-items: center;
+  align-items: center; 
   margin: 0em;
 }
 .paginate-container {
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 .votes-info-container {
   display: inline-flex;

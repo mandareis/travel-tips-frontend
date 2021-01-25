@@ -127,6 +127,7 @@ function ChangePassword() {
           name="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
+          onKeyUp={validatePassword}
         />
         <UpdateFormInput
           type="password"
@@ -135,6 +136,7 @@ function ChangePassword() {
           name="password"
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
+          onKeyUp={validatePassword}
         />
         <div id="navlink">
           <Link to="/settings">
