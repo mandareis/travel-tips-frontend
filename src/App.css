@@ -1,7 +1,9 @@
-        html {
+html {
   font-family: "Gothic A1", sans-serif;
   background-image: url("./images/balloon.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .site-main-outer {
@@ -225,10 +227,11 @@ h4 {
 }
 
 .settings {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   margin-top: 2em;
   padding: 1em;
+  flex-wrap: wrap;
 }
 
 .settings #user-edit,
