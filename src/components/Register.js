@@ -92,7 +92,7 @@ function Register() {
         store.user = data;
       });
       if (store.user) {
-        history.push("/suggestions");
+        history.push("/");
       }
       console.log(`Hello ${data.name}. Welcome!`);
     }

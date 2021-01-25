@@ -36,19 +36,28 @@ function NavBar(props) {
   };
   return (
     <div className="nav-bar-container">
-      {!store.user?.user_id ? (
         <div id="home-btn">
           <NavLink to="/">
             <i className="fas fa-home fa-lg"></i>
           </NavLink>
+          </div>
+      {!store.user?.user_id ? (
+        <div style={{display: "contents"}}>
+         
+         <div id="reg-nav">
+         <NavLink to="/register">
+          Register
+         </NavLink>
+       </div>
+       <div  id="log-nav">
+         <NavLink to="/login">
+          Login
+         </NavLink>
+       </div>
         </div>
+      
+     
       ) : null}
-
-      <div id="nav-search-btn">
-        <NavLink to="/suggestions">
-          <i className="fas fa-search fa-lg"></i>
-        </NavLink>
-      </div>
       {enableFeatures()}
     </div>
   );

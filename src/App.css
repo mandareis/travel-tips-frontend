@@ -1,4 +1,4 @@
-html {
+        html {
   font-family: "Gothic A1", sans-serif;
   background-image: url("./images/Tokyo_valentine_low.jpg");
   background-size: cover;
@@ -194,12 +194,9 @@ h4 {
 
 .nav-bar-container {
   display: inline-flex;
-  /* justify-content: center;
-  align-items: center; */
+  margin: 1em;
   padding: 0.5em;
   margin-top: 1em;
-
-  /* width: auto; */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75em;
   backdrop-filter: blur(10px);
@@ -213,7 +210,9 @@ h4 {
 #config-btn,
 #nav-search-btn,
 #add-sug-btn,
-#sugs-btn {
+#sugs-btn,
+#reg-nav, 
+#log-nav{
   padding: 1.5em;
 }
 
@@ -384,4 +383,8 @@ button {
   border-radius: 1.5em;
   outline: none;
   margin-bottom: 15px;
+}
+
+#home-btn {
+  display: inline-flex;
 }

@@ -5,7 +5,7 @@ import { parse } from "query-string";
 import { useHistory } from "react-router-dom";
 import VotesUpOrDown from "./VotesUpOrDown";
 
-function SuggestionsPage(props) {
+function Home(props) {
   let params = parse(props.location.search);
   const [data, setData] = useState();
   const [err, setErr] = useState(false);
@@ -41,7 +41,7 @@ function SuggestionsPage(props) {
 
   const handlesRedirect = (e) => {
     e.preventDefault();
-    history.push(`/suggestions?city=${encodeURIComponent(search)}`);
+    history.push(`/?city=${encodeURIComponent(search)}`);
   };
   // apply message for search results
   //check if the city is in the database
@@ -105,4 +105,4 @@ function SuggestionsPage(props) {
   );
 }
 
-export default observer(SuggestionsPage);
+export default observer(Home);

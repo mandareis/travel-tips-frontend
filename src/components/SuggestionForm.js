@@ -81,8 +81,8 @@ const LocationAutocomplete = (props) => {
       <input
         type="text"
         name="Location"
+        placeholder={props.placeholder}
         icon={props.icon}
-        placeholder="Enter a location"
         ref={eleRef}
       ></input>
     </div>
@@ -214,11 +214,13 @@ function SuggestionForm() {
         <LocationAutocomplete
           icon="fa-map-marker-alt"
           citiesOnly
+          placeholder="Enter a city"
           onPlaceChanged={(city) => setCity(city)}
           country={country}
         />
         <LocationAutocomplete
           icon="fa-map-marker-alt"
+          placeholder="Name of place"
           onPlaceChanged={(place) => setPlace(place)}
           country={country}
         />

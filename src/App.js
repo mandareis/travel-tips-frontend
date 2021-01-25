@@ -11,7 +11,7 @@ import Login from "./components/Login";
 import Settings from "./components/Settings";
 import NavBar from "./components/NavBar";
 import UpdateUser from "./components/UpdateUser";
-import SuggestionsPage from "./components/SuggestionsPage";
+import Home from "./components/Home";
 import DisplaySuggestion from "./components/DisplaySuggestion";
 import ChangePassword from "./components/ChangePassword";
 import SuggestionForm from "./components/SuggestionForm";
@@ -78,7 +78,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/register">
             <PageContainer>
               <Register />
             </PageContainer>
@@ -98,18 +98,9 @@ function App() {
               <UpdateUser />
             </PageContainer>
           </Route>
-          <Route
-            path="/suggestions"
-            render={(routeProps) => (
-              <PageContainer>
-                <SuggestionsPage {...routeProps} />
-                {console.log(routeProps)}
-              </PageContainer>
-            )}
-          ></Route>
-          <Route path="/change-password">
+          <Route path="/favorites">
             <PageContainer>
-              <ChangePassword />
+              <Favorites />
             </PageContainer>
           </Route>
           <Route path="/add-suggestion">
@@ -118,6 +109,20 @@ function App() {
             </PageContainer>
           </Route>
           <Route
+            path="/"
+            render={(routeProps) => (
+              <PageContainer>
+                <Home {...routeProps} />
+              </PageContainer>
+            )}
+          ></Route>
+          <Route path="/change-password">
+            <PageContainer>
+              <ChangePassword />
+            </PageContainer>
+          </Route>
+         
+          <Route
             path="/suggestion/:id"
             render={(routeProps) => (
               <PageContainer>
@@ -125,11 +130,7 @@ function App() {
               </PageContainer>
             )}
           />
-          <Route path="/favorites">
-            <PageContainer>
-              <Favorites />
-            </PageContainer>
-          </Route>
+         
         </Switch>
       </Router>
     </div>

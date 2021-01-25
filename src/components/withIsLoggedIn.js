@@ -7,7 +7,7 @@ const useAuthentication = () => {
   const history = useHistory();
   useEffect(() => {
     if (store.user) {
-      history.push("/suggestions");
+      history.push("/");
     }
   }, [history, store.user]);
 };
