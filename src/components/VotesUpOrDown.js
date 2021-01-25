@@ -48,16 +48,17 @@ function VotesUpOrDown(props) {
   let doUpvote = handlesVote(+1);
   let doDownvote = handlesVote(-1);
 
-  let getAmountOfVotes = async () => {
-    let response = await fetch(
-      `/suggestions/${props.suggestion?.id}/get_votes`
-    );
+  useEffect(() => {
+    let getAmountOfVotes = async () => {
+      let response = await fetch(
+        `/suggestions/${props.suggestion?.id}/get_votes`
+      );
+      let data = await response.json();
+      setVotes(data);
+    };
+    getAmountOfVotes();
+  }, []);
 
-    let data = await response.json();
-    console.log(data);
-    setVotes(data);
-  };
-  getAmountOfVotes();
   return (
     <div className="votes-container">
       <button

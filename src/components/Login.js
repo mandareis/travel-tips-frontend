@@ -38,7 +38,7 @@ function Login() {
     let loginBtn = {};
     if (loginErr && isButtonAnimating) {
       loginBtn = {
-        color:  "#d62828",
+        color: "#d62828",
       };
     }
     const innerLoginBtn = (
@@ -92,7 +92,7 @@ function Login() {
       runInAction(() => {
         store.user = data;
         if (store.user) {
-          history.push("/suggestions");
+          history.push("/");
         }
       });
       console.log(`Hello, ${data.username}`);
