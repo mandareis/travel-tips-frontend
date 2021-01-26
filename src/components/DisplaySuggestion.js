@@ -32,23 +32,23 @@ function DisplaySuggestion(props) {
   return (
     <div>
       {isLoading ? null : (
-        <div className="votes-info-container">
-          <div>
-            <div className="row">
-              <VotesUpOrDown suggestion={toJS(store.suggestion)} />
+        <>
+          <div className="row">
+            <VotesUpOrDown suggestion={toJS(store.suggestion)} />
+          </div>
+          <div className="votes-info-container">
+            <div className="suggestion-box">
+              <h2>{store.suggestion.title}</h2>
+              <p>"{store.suggestion.description}"</p>
+              <p>
+                Continent: {store.suggestion.place.continent}, Country: &nbsp;
+                {store.suggestion.place.country}, City: &nbsp;
+                {store.suggestion.place.city}
+              </p>
+              <p>tags: {store.suggestion.labels}</p>
             </div>
           </div>
-          <div className="suggestion-box">
-            <h2>{store.suggestion.title}</h2>
-            <p>"{store.suggestion.description}"</p>
-            <p>
-              Continent: {store.suggestion.place.continent}, Country: &nbsp;
-              {store.suggestion.place.country}, City: &nbsp;
-              {store.suggestion.place.city}
-            </p>
-            <p>tags: {store.suggestion.labels}</p>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );

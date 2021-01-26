@@ -111,10 +111,10 @@ function Home(props) {
               <p>No results were found for {params.city}</p>
             )}
 
-            {data.map((s, idx) => {
+            {data.map((s, index) => {
               return (
                 <div>
-                  <div className="votes-suggestion-container" key={idx}>
+                  <div className="votes-suggestion-container" key={index}>
                     <div>
                       <VotesUpOrDown suggestion={s} />
                     </div>
