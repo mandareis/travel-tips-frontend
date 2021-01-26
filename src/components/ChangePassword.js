@@ -80,8 +80,15 @@ function ChangePassword() {
           new_password: newPassword,
         }),
       });
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error("Password change failed.");
+        let message = "Password change failed";
+        if (data.error) {
+          message = data.error;
+        }
+        setMessage(message);
+        setErr(true);
+        // throw new Error("Password change failed.");
       } else {
         setErr(false);
         setMessage("Password successfully updated!");
@@ -103,6 +110,7 @@ function ChangePassword() {
       return () => clearTimeout(timer);
     }
   }, [message]);
+
   return (
     <div className="update-form" onSubmit={handlesUpdate}>
       <form className="password-input-container">
@@ -127,7 +135,6 @@ function ChangePassword() {
           name="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          onKeyUp={validatePassword}
         />
         <UpdateFormInput
           type="password"
@@ -136,7 +143,6 @@ function ChangePassword() {
           name="password"
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
-          onKeyUp={validatePassword}
         />
         <div id="navlink">
           <Link to="/settings">

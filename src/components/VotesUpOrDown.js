@@ -57,7 +57,7 @@ function VotesUpOrDown(props) {
       setVotes(data);
     };
     getAmountOfVotes();
-  }, []);
+  }, [direction]);
 
   return (
     <div className="votes-container">

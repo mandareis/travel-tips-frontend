@@ -87,15 +87,18 @@ function UpdateUser() {
         email,
       }),
     });
+    const data = await response.json();
     if (!response.ok) {
       setErr(true);
       setIsButtonAnimating(true);
-      setMessage("Username or email is already taken.");
+      let message = "Username or email is already taken.";
+      if (data.error) {
+        message = data.error;
+      }
+      setMessage(message);
     } else {
-      const data = await response.json();
       setMessage("User successfully updated");
       setErr(false);
-      // console.log(data);
       runInAction(() => {
         store.user.name = name;
         store.user.username = username;

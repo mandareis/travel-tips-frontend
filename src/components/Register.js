@@ -83,12 +83,16 @@ function Register() {
         password_confirmation,
       }),
     });
-    if (!response.ok) {
-      //inform user if email is invalid or username & password length
-      setRegisterErr("Please fill out the entire form");
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      console.log(response);
+      let message = "Please fill out the entire form.";
+      if (data.error) {
+        message = data.error;
+      }
+      setRegisterErr(message);
       setIsButtonAnimating(true);
     } else {
-      const data = await response.json();
       console.log(data);
       runInAction(() => {
         store.user = data;

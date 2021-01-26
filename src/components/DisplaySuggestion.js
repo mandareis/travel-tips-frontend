@@ -2,7 +2,7 @@ import { runInAction, toJS } from "mobx";
 import React, { useState, useEffect } from "react";
 import { useTravelStore } from "../TipsContext";
 import VotesUpOrDown from "./VotesUpOrDown";
-import {observer} from "mobx-react"
+import { observer } from "mobx-react";
 
 function DisplaySuggestion(props) {
   // might need refactoring
@@ -33,8 +33,10 @@ function DisplaySuggestion(props) {
     <div>
       {isLoading ? null : (
         <div className="votes-info-container">
-          <div style={{ marginRight: "3em" }}>
-            <VotesUpOrDown suggestion={toJS(store.suggestion)} />
+          <div>
+            <div className="row">
+              <VotesUpOrDown suggestion={toJS(store.suggestion)} />
+            </div>
           </div>
           <div className="suggestion-box">
             <h2>{store.suggestion.title}</h2>
@@ -52,4 +54,4 @@ function DisplaySuggestion(props) {
   );
 }
 
-export default observer(DisplaySuggestion)
+export default observer(DisplaySuggestion);
