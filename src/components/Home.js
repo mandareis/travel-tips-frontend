@@ -7,31 +7,37 @@ import VotesUpOrDown from "./VotesUpOrDown";
 import { action } from "mobx";
 
 function Home(props) {
+  const PAGE_SIZE = 5;
   let params = parse(props.location.search);
   const [data, setData] = useState(null);
   const history = useHistory();
   const [search, setSearch] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [page, setPage] = useState(1);
   const store = useTravelStore();
 
-  useEffect(() => {
-    // console.log(`Home: load: ${new Date().toISOString()}`);
-    return () => {
-      // console.log(`Home: unload: ${new Date().toISOString()}`);
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log(`Home: load: ${new Date().toISOString()}`);
+  //   return () => {
+  //     console.log(`Home: unload: ${new Date().toISOString()}`);
+  //   };
+  // }, []);
 
-  async function fetchSearch(city) {
+  async function fetchSearch(city, page) {
     try {
       if (!isLoading) {
         setIsLoading(true);
       }
-      let response = await fetch(`/suggestions?city=${city}`);
+      let response = await fetch(`/suggestions?city=${city}&page=${page}`);
       if (!response.ok) {
+        // error message here
       } else {
         let data = await response.json();
-        setData(data);
+        if (data.length === 0) {
+          setPage((page) => page - 1);
+        } else {
+          setData(data);
+        }
       }
     } catch (err) {
       err("This is not working.");
@@ -41,8 +47,8 @@ function Home(props) {
   }
 
   useEffect(() => {
-    fetchSearch(params.city);
-  }, [params.city]);
+    fetchSearch(params.city, page);
+  }, [params.city, page]);
 
   const handlesRedirect = (e) => {
     e.preventDefault();
@@ -50,8 +56,6 @@ function Home(props) {
       history.push(`/?city=${encodeURIComponent(search)}`);
     }
   };
-  // apply message for search results
-  //check if the city is in the database
 
   useEffect(() => {
     const timer = setTimeout(
@@ -62,6 +66,15 @@ function Home(props) {
     );
     return () => clearTimeout(timer);
   }, [store.successfullyDeletedUser, store]);
+
+  const handlesPagination = (direction) => {
+    return () => {
+      setPage((prevPage) => Math.max(prevPage + direction, 1));
+    };
+  };
+  let handlesgoback = handlesPagination(-1);
+  let handlesgoforward = handlesPagination(+1);
+
   return (
     <div>
       {store.successfullyDeletedUser === true ? (
@@ -94,27 +107,32 @@ function Home(props) {
             />
           </form>
         </div>
-        {isLoading ? null : ( // <div>Loading...</div>
+        {isLoading ? null : (
           <>
-            {data.length > 0 ? (
-              <div>
-                <p>Here are your results for: {params.city} </p>
-                <div className="paginate-container">
-                  <button type="button" className="paginate-left">
-                    <i className="fas fa-arrow-alt-circle-left "></i>
-                  </button>
-                  <button type="button" className="paginate-left">
-                    <i className="fas fa-arrow-alt-circle-right paginate-right"></i>
-                  </button>
+            {
+              data.length > 0 ? (
+                <div>
+                  <p>Here are your results for: {params.city} </p>
+                  <div className="paginate-container">
+                    <button className="paginate-left" onClick={handlesgoback}>
+                      <i className="fas fa-arrow-alt-circle-left "></i>
+                    </button>
+                    <button
+                      className="paginate-right"
+                      disabled={data.length < PAGE_SIZE}
+                      onClick={handlesgoforward}
+                    >
+                      <i className="fas fa-arrow-alt-circle-right"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ) : null
-            // <p>No Results were found</p>
+              ) : null
+              // <p>No Results were found</p>
             }
             {data.map((s, index) => {
               return (
-                <div>
-                  <div className="votes-suggestion-container" key={index}>
+                <div key={index}>
+                  <div className="votes-suggestion-container">
                     <div>
                       <VotesUpOrDown suggestion={s} />
                     </div>
