@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
-import { runInAction, toJS } from "mobx";
+import { runInAction } from "mobx";
 import { useTravelStore } from "../TipsContext";
 
 const SuggestionFormInput = (props) => {
@@ -180,15 +180,9 @@ function SuggestionForm() {
     if (!response.ok) {
       setError("Please fill out the entire form.");
     } else {
-      // console.log(data);
       runInAction(() => {
-        store.suggestion = data;
-        if (store.suggestion) {
-          history.push(`/suggestion/${data.id}`);
-        }
+        history.push(`/suggestion/${data.id}`);
       });
-
-      console.log(toJS(store.suggestion));
     }
   };
 

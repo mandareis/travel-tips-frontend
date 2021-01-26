@@ -4,7 +4,7 @@ function VotesUpOrDown(props) {
   const [direction, setDirection] = useState(0);
   const [votes, setVotes] = useState(0);
 
-  // needs to warn user he must to sign up to vote
+  // needs to warn user they must to sign up to vote
 
   useEffect(() => {
     async function fetchDirection() {
