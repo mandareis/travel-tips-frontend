@@ -57,7 +57,7 @@ function VotesUpOrDown(props) {
       setVotes(data);
     };
     getAmountOfVotes();
-  }, [direction]);
+  }, [direction, props.suggestion?.id]);
 
   return (
     <div className="votes-container">

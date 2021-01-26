@@ -17,9 +17,9 @@ function Home(props) {
   const store = useTravelStore();
 
   useEffect(() => {
-    console.log(`Home: load: ${new Date().toISOString()}`);
+    // console.log(`Home: load: ${new Date().toISOString()}`);
     return () => {
-      console.log(`Home: unload: ${new Date().toISOString()}`);
+      // console.log(`Home: unload: ${new Date().toISOString()}`);
     };
   }, []);
 
@@ -102,15 +102,24 @@ function Home(props) {
           </form>
         </div>
         {isLoading ? (
-          <div>Loading...</div>
+          <> </>
         ) : (
+          // <div>Loading...</div>
           <>
             {data.length > 0 ? (
-              <p>Here are your results for: {params.city} </p>
-            ) : (
-              <p>No results were found for {params.city}</p>
-            )}
-
+              <div>
+                <p>Here are your results for: {params.city} </p>
+                <div className="paginate-container">
+                  <button type="button" className="paginate-left">
+                    <i className="fas fa-arrow-alt-circle-left "></i>
+                  </button>
+                  <button type="button" className="paginate-left">
+                    <i className="fas fa-arrow-alt-circle-right paginate-right"></i>
+                  </button>
+                </div>
+              </div>
+            ) : null}
+            {/* <p>No results were found for {params.city}</p> */}
             {data.map((s, index) => {
               return (
                 <div>
@@ -124,14 +133,6 @@ function Home(props) {
                         Location: {s.place.city},{s.place.country}
                       </h5>
                     </div>
-                  </div>
-                  <div className="paginate-container">
-                    <button type="button" className="paginate-left">
-                      <i className="fas fa-arrow-alt-circle-left "></i>
-                    </button>
-                    <button type="button" className="paginate-left">
-                      <i className="fas fa-arrow-alt-circle-right paginate-right"></i>
-                    </button>
                   </div>
                 </div>
               );

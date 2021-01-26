@@ -1,11 +1,17 @@
 import React from "react";
+import { observer } from "mobx-react";
+import { useTravelStore } from "../TipsContext";
 
 function Favorites() {
+  const store = useTravelStore();
+
+  const getAllVotedPlaces = () => {};
+
   return (
     <div>
-      <p>All liked suggestions: </p>
+      <p> A list of all your voted places</p>
     </div>
   );
 }
 
-export default Favorites;
+export default observer(Favorites);

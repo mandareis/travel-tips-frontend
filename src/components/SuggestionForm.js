@@ -176,16 +176,18 @@ function SuggestionForm() {
         labels,
       }),
     });
+    let data = await response.json();
     if (!response.ok) {
       setError("Please fill out the entire form.");
-      return;
     } else {
-      let data = await response.json();
-      console.log(data);
+      // console.log(data);
       runInAction(() => {
         store.suggestion = data;
+        if (store.suggestion) {
+          history.push(`/suggestion/${data.id}`);
+        }
       });
-      history.push(`/suggestion/${data.id}`);
+
       console.log(toJS(store.suggestion));
     }
   };
