@@ -15,6 +15,7 @@ function DisplaySuggestion(props) {
     async function getSuggestion() {
       const response = await fetch(`/suggestions/${props.params.id}`);
       let data = await response.json();
+      console.log(data);
       runInAction(() => {
         store.suggestion = data;
       });

@@ -8,8 +8,7 @@ import { action } from "mobx";
 
 function Home(props) {
   let params = parse(props.location.search);
-  const [data, setData] = useState();
-  // const [err, setErr] = useState(false);
+  const [data, setData] = useState(null);
   const history = useHistory();
   const [search, setSearch] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,17 +29,12 @@ function Home(props) {
       }
       let response = await fetch(`/suggestions?city=${city}`);
       if (!response.ok) {
-        // setErr(true);
-        // setMessage("Please fill out the entire form.");
       } else {
         let data = await response.json();
-        // setMessage("Here are your results for: ");
         setData(data);
-        // setErr(false);
       }
     } catch (err) {
-      // setErr(true);
-      // setMessage(err.message);
+      err("This is not working.");
     } finally {
       setIsLoading(false);
     }
@@ -68,7 +62,6 @@ function Home(props) {
     );
     return () => clearTimeout(timer);
   }, [store.successfullyDeletedUser, store]);
-
   return (
     <div>
       {store.successfullyDeletedUser === true ? (
@@ -101,10 +94,7 @@ function Home(props) {
             />
           </form>
         </div>
-        {isLoading ? (
-          <> </>
-        ) : (
-          // <div>Loading...</div>
+        {isLoading ? null : ( // <div>Loading...</div>
           <>
             {data.length > 0 ? (
               <div>
@@ -118,8 +108,9 @@ function Home(props) {
                   </button>
                 </div>
               </div>
-            ) : null}
-            {/* <p>No results were found for {params.city}</p> */}
+            ) : null
+            // <p>No Results were found</p>
+            }
             {data.map((s, index) => {
               return (
                 <div>

@@ -99,6 +99,8 @@ function SuggestionForm() {
   const [error, setError] = useState(null);
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("US");
+  const charLimit = 1500;
+  const isDescriptionTooLong = description.length > charLimit;
   const store = useTravelStore();
 
   useEffect(() => {
@@ -158,6 +160,10 @@ function SuggestionForm() {
       setError("Failed to match location. Please review your input.");
       return;
     }
+    if (isDescriptionTooLong) {
+      setError("Description is too long.");
+      return;
+    }
     let response = await fetch("/suggestions", {
       method: "POST",
       headers: {
@@ -177,6 +183,7 @@ function SuggestionForm() {
       }),
     });
     let data = await response.json();
+
     if (!response.ok) {
       setError("Please fill out the entire form.");
     } else {
@@ -237,6 +244,13 @@ function SuggestionForm() {
           longtext
           onChange={(e) => setDescription(e.target.value)}
         />
+        {!isDescriptionTooLong ? (
+          <h6>Remaining Characters: {charLimit - description.length}</h6>
+        ) : (
+          <h6 style={{ color: "#d62828" }}>
+            Remaining Characters: {charLimit - description.length}
+          </h6>
+        )}
         <SuggestionFormInput
           type="text"
           icon="fa-tag"
@@ -245,9 +259,6 @@ function SuggestionForm() {
           placeholder="Tags..."
           onChange={(e) => setLabels(e.target.value)}
         />
-        {/* <pre style={{ width: "100%", textAlign: "left" }}>
-          place: {JSON.stringify(place, null, 2)}
-        </pre> */}
         <div id="get-login-btn">
           <button type="submit" className="add-sug-btn">
             <i className="fas fa-paper-plane fa-lg"></i>

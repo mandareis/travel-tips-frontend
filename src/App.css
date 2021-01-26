@@ -53,11 +53,11 @@ textarea {
   background: transparent;
   justify-content: center;
   border: none;
-  width: 100%;
   resize: none;
+  width: 250px;
   border-radius: 0.85em;
   outline: none;
-  margin: 5px;
+  /* margin: 5px; */
 }
 
 h2 {
@@ -103,7 +103,7 @@ h4 {
 }
 
 /* styles footer */
-
+ 
 .register-form .input-prefix-icon,
 .login-form .input-prefix-icon,
 .update-form .input-prefix-icon,
@@ -397,4 +397,7 @@ button {
 #home-btn {
   display: inline-flex;
 }
-
+h6 {
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
