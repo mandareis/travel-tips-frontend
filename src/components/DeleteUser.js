@@ -65,9 +65,10 @@ function DeleteUser() {
   const store = useTravelStore();
 
   const handlesDeleteUser = async () => {
-    let response = await fetch(`/users/${store.user.user_id}`, {
+    let response = await fetch(`/users`, {
       method: "DELETE",
     });
+    console.log(response);
     if (!response.ok) {
       console.log("Something is not right");
     } else {

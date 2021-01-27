@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import { withIsLoggedOut } from "./withIsLoggedOut";
-// could move the updateforminput to its own file
 
 const UpdateFormInput = (props) => {
   return (
@@ -82,13 +81,13 @@ function ChangePassword() {
       });
       const data = await response.json();
       if (!response.ok) {
-        let message = "Password change failed";
+        let message = "Password change failed.";
         if (data.error) {
           message = data.error;
         }
         setMessage(message);
         setErr(true);
-        // throw new Error("Password change failed.");
+        throw new Error(message);
       } else {
         setErr(false);
         setMessage("Password successfully updated!");
@@ -106,7 +105,7 @@ function ChangePassword() {
     if (message) {
       const timer = setTimeout(() => {
         setMessage(null);
-      }, 2000);
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [message]);

@@ -105,6 +105,8 @@ function SuggestionForm() {
   useEffect(() => {
     async function LoadCountries() {
       let countries = await getCountriesList();
+      countries = countries.sort((a, b) => (a.country > b.country ? 1 : -1));
+
       setCountries(countries);
     }
     LoadCountries();

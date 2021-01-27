@@ -23,7 +23,7 @@ function Favorites() {
   useEffect(() => {
     getAllVotes();
   }, [isLoading]);
-  console.log(allSug);
+
   return (
     <div>
       <h4> All your voted places:</h4>
