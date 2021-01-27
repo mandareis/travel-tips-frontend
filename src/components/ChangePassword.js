@@ -119,7 +119,7 @@ function ChangePassword() {
         ) : (
           <p style={{ color: "red" }}>{message}</p>
         )}
-        <h2>Update password:</h2>
+        <h3>Update password:</h3>
         <UpdateFormInput
           type="password"
           icon="fa-lock"

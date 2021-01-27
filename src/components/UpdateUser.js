@@ -118,7 +118,7 @@ function UpdateUser() {
           <p id="issues">{message}</p>
         )}
 
-        <h2>Update {store.user?.username}'s account:</h2>
+        <h3>Update {store.user?.username}'s account:</h3>
         <UpdateFormInput
           type="text"
           icon="fa-user"

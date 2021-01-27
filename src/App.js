@@ -48,8 +48,8 @@ const PageContainer = ({ children }) => {
 
   return (
     <div className="container">
-      <div className="row ">
-        <div className="app-title">
+      <div className="row">
+        <div className="col">
           <a href="/" id="title">
             ExploreTravel.tips
           </a>

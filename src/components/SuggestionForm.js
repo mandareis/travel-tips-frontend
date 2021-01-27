@@ -93,7 +93,6 @@ function SuggestionForm() {
   let history = useHistory();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [labels, setLabels] = useState("");
   const [place, setPlace] = useState(null);
   const [city, setCity] = useState(null);
   const [error, setError] = useState(null);
@@ -179,7 +178,6 @@ function SuggestionForm() {
         },
         title,
         description,
-        labels,
       }),
     });
     let data = await response.json();
@@ -251,14 +249,14 @@ function SuggestionForm() {
             Remaining Characters: {charLimit - description.length}
           </h6>
         )}
-        <SuggestionFormInput
+        {/* <SuggestionFormInput
           type="text"
           icon="fa-tag"
           value={labels}
           name="tags"
           placeholder="Tags..."
           onChange={(e) => setLabels(e.target.value)}
-        />
+        /> */}
         <div id="get-login-btn">
           <button type="submit" className="add-sug-btn">
             <i className="fas fa-paper-plane fa-lg"></i>

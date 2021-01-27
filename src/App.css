@@ -66,10 +66,10 @@ h2 {
   color: rgba(0, 0, 0, 0.6);
 }
 
-h4 {
+h4, h3 {
   text-align: center;
   display: block;
-  margin-block-start: 0em;
+  /* margin-block-start: 0em; */
   color: rgba(0, 0, 0, 0.7);
 }
 /* adds style to titles,input and a */
@@ -391,13 +391,24 @@ button {
   background-color: transparent;
   border-radius: 1.5em;
   outline: none;
+  width: 100%;
+  /* size: 200px; */
   margin-bottom: 15px;
 }
 
 #home-btn {
   display: inline-flex;
 }
-h6 {
-  color: rgba(0, 0, 0, 0.6);
-  text-align: center;
+
+.suggestion-container {
+  display: inline-flex;
+
 }
+
+.favorites-container {
+display: grid;
+justify-content: center;
+height: 400px;
+width: 100%;
+overflow: scroll;
+} 

@@ -45,7 +45,7 @@ function DisplaySuggestion(props) {
                 {store.suggestion.place.country}, City: &nbsp;
                 {store.suggestion.place.city}
               </p>
-              <p>tags: {store.suggestion.labels}</p>
+              {/* <p>tags: {store.suggestion.labels}</p> */}
             </div>
           </div>
         </>

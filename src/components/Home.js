@@ -16,7 +16,6 @@ function Home(props) {
   const [page, setPage] = useState(1);
   const store = useTravelStore();
 
-  // search does not reset, it tries to find another city on the same page it's currently at.
   // useEffect(() => {
   //   console.log(`Home: load: ${new Date().toISOString()}`);
   //   return () => {
@@ -35,6 +34,7 @@ function Home(props) {
       } else {
         let data = await response.json();
         setData(data);
+
         if (data.length === 0 && page > 1) {
           setPage((page) => page - 1);
         }
@@ -75,7 +75,7 @@ function Home(props) {
   };
   let handlesgoback = handlesPagination(-1);
   let handlesgoforward = handlesPagination(+1);
-
+  console.log(data);
   return (
     <div>
       {store.successfullyDeletedUser === true ? (
