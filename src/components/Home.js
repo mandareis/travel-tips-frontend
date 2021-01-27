@@ -16,6 +16,7 @@ function Home(props) {
   const [page, setPage] = useState(1);
   const store = useTravelStore();
 
+  // search does not reset, it tries to find another city on the same page it's currently at.
   // useEffect(() => {
   //   console.log(`Home: load: ${new Date().toISOString()}`);
   //   return () => {
@@ -30,17 +31,16 @@ function Home(props) {
       }
       let response = await fetch(`/suggestions?city=${city}&page=${page}`);
       if (!response.ok) {
-        // error message here
+        console.log("there's an error.");
       } else {
         let data = await response.json();
-        if (data.length === 0) {
+        setData(data);
+        if (data.length === 0 && page > 1) {
           setPage((page) => page - 1);
-        } else {
-          setData(data);
         }
       }
-    } catch (err) {
-      err("This is not working.");
+    } catch (e) {
+      console.log(e);
     } finally {
       setIsLoading(false);
     }
@@ -53,6 +53,7 @@ function Home(props) {
   const handlesRedirect = (e) => {
     e.preventDefault();
     if (search !== params.city) {
+      setPage(1);
       history.push(`/?city=${encodeURIComponent(search)}`);
     }
   };
@@ -109,26 +110,23 @@ function Home(props) {
         </div>
         {isLoading ? null : (
           <>
-            {
-              data.length > 0 ? (
-                <div>
-                  <p>Here are your results for: {params.city} </p>
-                  <div className="paginate-container">
-                    <button className="paginate-left" onClick={handlesgoback}>
-                      <i className="fas fa-arrow-alt-circle-left "></i>
-                    </button>
-                    <button
-                      className="paginate-right"
-                      disabled={data.length < PAGE_SIZE}
-                      onClick={handlesgoforward}
-                    >
-                      <i className="fas fa-arrow-alt-circle-right"></i>
-                    </button>
-                  </div>
+            {data.length > 0 ? (
+              <div>
+                <p>Here are your results for: {params.city} </p>
+                <div className="paginate-container">
+                  <button className="paginate-left" onClick={handlesgoback}>
+                    <i className="fas fa-arrow-alt-circle-left "></i>
+                  </button>
+                  <button
+                    className="paginate-right"
+                    disabled={data.length < PAGE_SIZE}
+                    onClick={handlesgoforward}
+                  >
+                    <i className="fas fa-arrow-alt-circle-right"></i>
+                  </button>
                 </div>
-              ) : null
-              // <p>No Results were found</p>
-            }
+              </div>
+            ) : null}
             {data.map((s, index) => {
               return (
                 <div key={index}>
