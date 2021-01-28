@@ -303,6 +303,7 @@ h4, h3 {
 }
 .inner-modal {
   text-align: center;
+  color: #d62828;
 }
 .modal {
   z-index: 100;

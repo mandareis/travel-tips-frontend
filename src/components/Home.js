@@ -7,7 +7,6 @@ import VotesUpOrDown from "./VotesUpOrDown";
 import { action } from "mobx";
 
 function Home(props) {
-  const PAGE_SIZE = 5;
   let params = parse(props.location.search);
   const [data, setData] = useState(null);
   const history = useHistory();
@@ -15,22 +14,18 @@ function Home(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const store = useTravelStore();
+  const [isNextPage, setIsNextPage] = useState(true);
 
   async function fetchSearch(city, page) {
     try {
-      // if (!isLoading) {
-      //   setIsLoading(true);
       let response = await fetch(`/suggestions?city=${city}&page=${page}`);
-
       if (!response.ok) {
         console.log("there's an error.");
       } else {
-        let data = await response.json();
+        let { data, next_page: nextPage } = await response.json();
         setData(data);
-        // not ideal. causes a re-render?
-        if (data.length === 0 && page > 1) {
-          setPage((page) => page - 1);
-        }
+        setIsNextPage(nextPage);
+        console.log(data);
       }
     } catch (e) {
       console.log(e);
@@ -68,7 +63,7 @@ function Home(props) {
   };
   let handlesgoback = handlesPagination(-1);
   let handlesgoforward = handlesPagination(+1);
-
+  console.log(params);
   return (
     <div>
       {store.successfullyDeletedUser === true ? (
@@ -101,42 +96,51 @@ function Home(props) {
             />
           </form>
         </div>
-        {isLoading ? null : (
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
           <>
-            {data.length > 0 ? (
-              <div>
-                <p>Here are your results for: {params.city} </p>
-                <div className="paginate-container">
-                  <button className="paginate-left" onClick={handlesgoback}>
-                    <i className="fas fa-arrow-alt-circle-left "></i>
-                  </button>
-                  <button
-                    className="paginate-right"
-                    disabled={data.length < PAGE_SIZE}
-                    onClick={handlesgoforward}
-                  >
-                    <i className="fas fa-arrow-alt-circle-right"></i>
-                  </button>
-                </div>
-              </div>
-            ) : null}
-            {data.map((s, index) => {
-              return (
-                <div key={index}>
-                  <div className="votes-suggestion-container">
-                    <div>
-                      <VotesUpOrDown suggestion={s} />
-                    </div>
-                    <div className="list-of-places-container">
-                      <a href={`/suggestion/${s.id}`}>{s.place.name}</a>
-                      <h5>
-                        Location: {s.place.city},{s.place.country}
-                      </h5>
-                    </div>
+            {data.length === 0 ? (
+              // <div>No results.</div>
+              <></>
+            ) : (
+              <>
+                <div>
+                  <p>Here are your results for: {params.city} </p>
+                  <div className="paginate-container">
+                    <button className="paginate-left" onClick={handlesgoback}>
+                      <i className="fas fa-arrow-alt-circle-left "></i>
+                    </button>
+                    <button
+                      className="paginate-right"
+                      disabled={!isNextPage}
+                      onClick={handlesgoforward}
+                    >
+                      <i className="fas fa-arrow-alt-circle-right"></i>
+                    </button>
                   </div>
                 </div>
-              );
-            })}
+                <div>
+                  {data.map((s, index) => {
+                    return (
+                      <div key={index}>
+                        <div className="votes-suggestion-container">
+                          <div>
+                            <VotesUpOrDown suggestion={s} />
+                          </div>
+                          <div className="list-of-places-container">
+                            <a href={`/suggestion/${s.id}`}>{s.place.name}</a>
+                            <h5>
+                              Location: {s.place.city},{s.place.country}
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
