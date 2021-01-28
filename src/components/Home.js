@@ -25,7 +25,6 @@ function Home(props) {
         let { data, next_page: nextPage } = await response.json();
         setData(data);
         setIsNextPage(nextPage);
-        console.log(data);
       }
     } catch (e) {
       console.log(e);
@@ -63,7 +62,7 @@ function Home(props) {
   };
   let handlesgoback = handlesPagination(-1);
   let handlesgoforward = handlesPagination(+1);
-  console.log(params);
+
   return (
     <div>
       {store.successfullyDeletedUser === true ? (
