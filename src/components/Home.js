@@ -19,10 +19,12 @@ function Home(props) {
   async function fetchSearch(city, page) {
     try {
       let response = await fetch(`/suggestions?city=${city}&page=${page}`);
+      let responseData = await response.json();
       if (!response.ok) {
-        console.log("there's an error.");
+        setData([]);
+        console.log(`error occured during request`, responseData);
       } else {
-        let { data, next_page: nextPage } = await response.json();
+        let { data, next_page: nextPage } = responseData;
         setData(data);
         setIsNextPage(nextPage);
       }

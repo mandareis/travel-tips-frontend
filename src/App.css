@@ -66,7 +66,8 @@ h2 {
   color: rgba(0, 0, 0, 0.6);
 }
 
-h4, h3 {
+h4,
+h3 {
   text-align: center;
   display: block;
   color: rgba(0, 0, 0, 0.7);
@@ -74,8 +75,8 @@ h4, h3 {
 /* adds style to titles,input and a */
 
 #title {
-  font-family: 'Pompiere', cursive;
-  font-size: 45px;
+  font-family: "Pompiere", cursive;
+  font-size: 50px;
 }
 /* styles footer */
 .footer-colors {
@@ -102,7 +103,7 @@ h4, h3 {
 }
 
 /* styles footer */
- 
+
 .register-form .input-prefix-icon,
 .login-form .input-prefix-icon,
 .update-form .input-prefix-icon,
@@ -143,7 +144,6 @@ h4, h3 {
   outline: none;
   margin-top: 0em;
 }
-
 
 #issues {
   color: red;
@@ -214,8 +214,8 @@ h4, h3 {
 #nav-search-btn,
 #add-sug-btn,
 #sugs-btn,
-#reg-nav, 
-#log-nav{
+#reg-nav,
+#log-nav {
   padding: 1.5em;
 }
 
@@ -264,7 +264,6 @@ h4, h3 {
 .votes-container {
   display: grid;
 }
-
 
 .votes-suggestion-container {
   display: flex;
@@ -378,7 +377,7 @@ button {
   text-align: center;
 }
 .search-container .input-prefix-icon {
-  align-items: center; 
+  align-items: center;
   margin: 0em;
 }
 .paginate-container {
@@ -405,13 +404,16 @@ button {
 
 .suggestion-container {
   display: inline-flex;
-
 }
 
 .favorites-container {
-display: grid;
-justify-content: center;
-height: 400px;
-width: 100%;
-overflow: scroll;
-} 
+  display: grid;
+  justify-content: center;
+  height: 400px;
+  width: 100%;
+  overflow: scroll;
+}
+
+.pac-target-input {
+  width: 100%;
+}
