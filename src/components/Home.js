@@ -64,7 +64,7 @@ function Home(props) {
   };
   let handlesgoback = handlesPagination(-1);
   let handlesgoforward = handlesPagination(+1);
-
+  console.log(search);
   return (
     <div>
       {store.successfullyDeletedUser === true ? (
@@ -95,8 +95,12 @@ function Home(props) {
               autoComplete="off"
               placeholder="Search for a city..."
             />
+            <button className="search-city-btn">
+              <i className="fas fa-arrow-right"></i>
+            </button>
           </form>
         </div>
+
         {isLoading ? (
           <div>Loading...</div>
         ) : (

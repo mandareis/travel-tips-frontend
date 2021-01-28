@@ -157,7 +157,8 @@ h3 {
 .update-btn:hover,
 .add-sug-btn:hover,
 .paginate-left:hover,
-.paginate-right:hover {
+.paginate-right:hover,
+.search-city-btn:hover {
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -166,8 +167,9 @@ h3 {
 .go-back-btn:active,
 .update-btn:active,
 .add-sug-btn:active,
-.paginate-left:hover,
-.paginate-right:hover {
+.paginate-left:active,
+.paginate-right:active,
+.search-city-btn:active {
   color: rgba(0, 0, 0, 0.65);
 }
 
@@ -416,4 +418,9 @@ button {
 
 .pac-target-input {
   width: 100%;
+}
+
+.search-city-btn {
+  background: transparent;
+  outline: none;
 }
