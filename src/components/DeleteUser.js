@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import ReactDOM from "react-dom";
 import { runInAction } from "mobx";
 import { withIsLoggedOut } from "./withIsLoggedOut";
+
 const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
   function toggle() {

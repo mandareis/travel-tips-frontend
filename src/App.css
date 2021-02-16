@@ -272,11 +272,6 @@ h3 {
 }
 .private-features {
   display: flex;
-}
-/* Modal styling */
-.App {
-  text-align: center;
-  padding-top: 2rem;
   padding-bottom: 2rem;
 }
 

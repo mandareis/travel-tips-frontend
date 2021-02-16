@@ -115,6 +115,7 @@ function SuggestionForm() {
   const getCountriesList = async () => {
     // add try catch later
     let response = await fetch("/places/countries-list");
+
     let data = await response.json();
     return data;
   };
